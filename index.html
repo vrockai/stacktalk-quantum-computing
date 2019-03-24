@@ -1,49 +1,621 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+  <title>Quantum Computing TL;DR</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/quantum.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- Printing and PDF exports -->
+  <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+  <style>
+    .reveal section img {
+      border: none;
+      background: transparent;
+    }
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    .reveal blockquote {
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+  </style>
+</head>
+<body>
+
+<div class="reveal">
+  $
+  \definecolor{r}{RGB}{255,0,0}
+  \definecolor{g}{RGB}{0,255,0}
+  \definecolor{b}{RGB}{0,0,255}
+  \definecolor{d}{RGB}{255,255,255}
+
+  \newcommand{\ket}[1]{ \mathbf{|#1\rangle} }
+  $
+  <div class="slides">
+    <!--
+    Title
+    -->
+    <section>
+      <h1>Quantum Computing tl;dr</h1>
+      <h2>Viliam Rockai</h2>
+    </section>
+
+    <!--
+    About
+    -->
+    <section>
+      <h2>whoami</h2>
+      <ul>
+        <li>Studied AI</li>
+        <li>Work at DNAstack</li>
+        <li>Like to code intuitive code</li>
+        <li>Like to get familiar with weird stuff</li>
+      </ul>
+    </section>
+
+    <!--
+    Agenda
+    -->
+    <section>
+      <h2>Agenda</h2>
+      <ol>
+        <li>Introduction</li>
+        <li>Math prerequisites</li>
+        <li>Qubit</li>
+        <li>Quantum logic gates</li>
+        <li>Deutsch's oracle</li>
+      </ol>
+    </section>
+
+    <!--
+    Introduction
+    -->
+    <section>
+      <section>
+      <h2>Introduction</h2>
+      <p class="fragment">
+        $${\displaystyle i\hbar {\frac {d}{dt}}\vert \Psi (t)\rangle ={\hat {H}}\vert \Psi (t)\rangle }$$
+      </p>
+      <p class="fragment">
+        $${\displaystyle i\hbar {\frac {\partial }{\partial t}}\Psi (\mathbf {r} ,t)=\left[{\frac {-\hbar ^{2}}{2m}}\nabla ^{2}+V(\mathbf {r} ,t)\right]\Psi (\mathbf {r} ,t)}$$
+      </p>
+      </section>
+      <section data-background="https://media.giphy.com/media/vKnmQ9Ky8wgTK/giphy.gif">
+      </section>
+    </section>
+
+    <!--
+    Prerequisites
+    -->
+    <section>
+      <section>
+        <h2>Math prerequisites</h2>
+      </section>
+      <section>
+        <h2 style="text-decoration: line-through;">Complex Numbers</h2>
+
+        <p>
+          We can deal without them today, but if you're into this, you better get familiar with them.
+        </p>
+      </section>
+      <section>
+        <h2>Matrix Multiplication</h2>
+      </section>
+      <section>
+        <h2>Addition modulo 2</h2>
+
+        <p>
+        $\oplus$ is just another way to write XOR.
+        </p>
+
+        $$
+        \begin{array}{ccc}
+        x & y & x \oplus y \\
+        \hline
+        0 & 0 & 0 \\
+        0 & 1 & 1 \\
+        1 & 0 & 1 \\
+        1 & 1 & 0 \\
+        \end{array}
+        $$
+      </section>
+    </section>
+
+    <!--
+    Qubit
+    -->
+    <section>
+      <section>
+        <h2>Qubit</h2>
+      </section>
+      <section data-background="assets/trudeau.jpg" data-background-transition="zoom">
+        <blockquote class="fragment" cite="https://www.scottaaronson.com/blog/?p=2694">
+          <div>
+          "Regular computer bit is either a 1 or a 0, on or off. A quantum state can be much more complex than that,
+          because as we know [speeding up dramatically] things can be both particle and wave at the same times and the
+          uncertainty around quantum states [laughter] allows us to encode more information into a much smaller
+          computer."
+          </div>
+          <div>
+          &nbsp;<i style="float: right;">Justin Trudeu</i>
+          </div>
+        </blockquote>
+      </section>
+      <section>
+        <h2>Qubit</h2>
+
+        $$
+        \alpha\ket{0} + \beta\ket{1}
+        $$
+
+        $$
+        \begin{bmatrix}
+        \alpha \\
+        \beta \\
+        \end{bmatrix}
+        $$
+
+        $$
+        \ket{0} =
+        \begin{bmatrix}
+        1 \\
+        0 \\
+        \end{bmatrix}
+        =
+        1\ket{0} + 0\ket{1}
+        =
+        \ket{0}
+        $$
+
+        $$
+        \ket{1} =
+        \begin{bmatrix}
+        0 \\
+        1 \\
+        \end{bmatrix}
+        =
+        0\ket{0} + 1\ket{1}
+        =
+        \ket{1}
+        $$
+      </section>
+      <section>
+        <h3>Bloch Sphere</h3>
+        <img src="assets/bloch2.svg" alt="Bloch Sphere" style="width: 35rem;">
+      </section>
+    </section>
+
+    <!--
+    Quantum logic gates
+    -->
+    <section>
+      <section>
+        <h2>Quantum Logic Gates</h2>
+        Must be a Unitary matrix!!!
+      </section>
+      <section>
+        <h3>Not Gate</h3>
+
+        $$
+        X \equiv
+        \begin{bmatrix}
+        0 & 1 \\
+        1 & 0 \\
+        \end{bmatrix}
+        $$
+
+        $$
+        X\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
+        \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}\beta \\ \alpha\end{bmatrix} =
+        \begin{bmatrix}\beta \\ \alpha\end{bmatrix}
+        $$
+      </section>
+      <section>
+        <h3>Hadamard Gate</h3>
+
+        $$
+        H \equiv \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+        1 & 1 \\
+        1 & -1 \\
+
+        \end{bmatrix}
+        $$
+
+        $$
+        H\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
+        \alpha\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
+        \beta\frac{\ket{0} - \ket{1}}{\sqrt{2}}
+        $$
+
+        $$
+        H\ket{0} =
+        H\begin{bmatrix}1 \\ 0\end{bmatrix} =
+        1\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
+        0\frac{\ket{0} - \ket{1}}{\sqrt{2}} =
+        \frac{\ket{0} + \ket{1}}{\sqrt{2}}
+        $$
+
+        $$
+        H\ket{1} =
+        H\begin{bmatrix}0 \\ 1\end{bmatrix} =
+        0\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
+        1\frac{\ket{0} - \ket{1}}{\sqrt{2}} =
+        \frac{\ket{0} - \ket{1}}{\sqrt{2}}
+        $$
+
+      </section>
+    </section>
+
+    <!--
+    Quantum computing
+    -->
+    <section>
+      <section>
+        <h2>Quantum Computing</h2>
+
+      </section>
+      <section>
+        <h2>Deutsch's algorithm</h2>
+
+        Not really useful. Artificial. Just to learn about QC.
+
+        <p>
+          Deutsch’s algorithm determines whether a function <span class="fragment">$$f:\{0,1\}\rightarrow \{0,1\}$$</span> is balanced or constant.
+        </p>
+
+        <p>
+          <span class="fragment">Constant: $$f(0) = f(1)$$</span>
+          <span class="fragment">Balanced: $$f(0) \neq f(1)$$</span>
+        </p>
+      </section>
+      <section>
+        <h2>The function</h2>
+        We consider the <b>function as an input</b> to the algorithm.
+
+        $$f(x) = 1$$
+
+        $$
+        \ket{0} =
+        \begin{bmatrix}
+        1\\
+        0\\
+        \end{bmatrix}
+        ,
+        \ket{1} =
+        \begin{bmatrix}
+        0\\
+        1\\
+        \end{bmatrix}
+        $$
+
+        $$
+        N_f =
+        \begin{bmatrix}
+        0 & 0\\
+        1 & 1\\
+        \end{bmatrix}
+        ,
+        N_f^TN_f \neq I
+        $$
+      </section>
+
+      <section>
+        <h2>Classical algorithm</h2>
+
+        Needs $$n^2 - 1$$ evaluations.
+
+        $$
+        n = 1
+        $$
+      </section>
+
+      <section>
+        $$
+        U_f =
+        \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 0 & 1 & 0 \\
+        \end{bmatrix}
+        $$
+
+        $$
+        U_f U_f =
+        \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+        \end{bmatrix}
+        $$
+      </section>
+
+      <section>
+        <h2>Deutsch's algorithm circuit</h2>
+        <img src="assets/deutsch-circuit.png">
+      </section>
+
+      <section data-transition="fade">
+        <h2>$\ket{\Psi_0}$ - Initialization</h2>
+        <img src="assets/deutsch-circuit.png">
+
+        $$
+        \ket{\Psi_0} = \ket{0} \ket{0}
+        $$
+      </section>
+
+      <section data-transition="fade">
+        <h2>$\ket{\Psi_1}$ - Qubit flip</h2>
+        <img src="assets/deutsch-circuit.png">
+
+        $$
+        \ket{\Psi_1} = \ket{0} \ket{1}
+        $$
+      </section>
+
+      <section data-transition="fade">
+        <h2>$\ket{\Psi_2}$ - Superposition</h2>
+        <img src="assets/deutsch-circuit.png">
+
+        $$
+        \ket{\Psi_2} =
+        \frac{1}{2}
+        \left(
+        \ket{0}\ket{0} -
+        \ket{0}\ket{1} +
+        \ket{1}\ket{0} -
+        \ket{1}\ket{1}
+        \right)
+        $$
+      </section>
+
+      <section>
+        <h2>$\ket{\Psi_3}$ - Evaluation</h2>
+        <img src="assets/deutsch-circuit.png">
+
+        $$
+        \ket{\psi_3} =
+        \frac{1}{2}
+        (
+        \ket{0} \ket{f(0)} -
+        \ket{0} \ket{1  \oplus f(0)} +
+        \ket{1} \ket{f(1)} -
+        \ket{1} \ket{1  \oplus f(1)}
+        )
+        $$
+      </section>
+
+      <section>
+        <h2>$\ket{\Psi_3}$ - Evaluation</h2>
+
+        <h3>Case 1: constant $f(x)$</h3>
+
+        $$
+        \ket{\psi_3} =
+        \frac{1}{2}
+        (
+        \ket{0} \ket{f(0)} -
+        \ket{0} \ket{1  \oplus f(0)} +
+        \ket{1} \ket{f(0)} -
+        \ket{1} \ket{1  \oplus f(0)}
+        )
+        \\
+        = \frac{1}{2}
+        (
+        (\ket{0} + \ket{1}) \otimes \ket{f(0)} -
+        (\ket{0} + \ket{1}) \otimes \ket{1 \oplus f(0)}
+        )
+        \\
+        = \frac{1}{2}
+        (
+        (\ket{0} + \ket{1}) \otimes
+        (\ket{f(0)\rangle - |1 \oplus f(0)})
+        )
+        \\
+        = \frac{1}{\sqrt{2}} \ket{+}
+        \otimes (
+        \ket{f(0)\rangle - |1 \oplus f(0)}
+        )
+        $$
+
+
+      </section>
+
+      <section>
+        <h2>$\ket{\Psi_3}$ - Evaluation</h2>
+        <h3>Case 2: balanced $f(x)$</h3>
+
+        $$
+        \definecolor{energy}{RGB}{114,0,172}
+        \definecolor{freq}{RGB}{45,177,93}
+
+        \color{energy}X
+        \ket{\psi_3} =
+        \frac{1}{2}
+        (
+        \ket{0} \ket{f(0)} -
+        \ket{0} \ket{f(1)} +
+        \ket{1} \ket{f(1)} -
+        \ket{1} \ket{f(0)}
+        )
+        \\
+        = \frac{1}{2}
+        (
+        (\ket{0} - \ket{1}) \otimes \ket{f(0)} -
+        (\ket{0} - \ket{1}) \otimes \ket{f(1)}
+        )
+        \\
+        = \frac{1}{2}
+        (
+        (\ket{0} - \ket{1}) \otimes
+        (\ket{f(0)\rangle - |f(1)})
+        )
+        \\
+        = \frac{1}{\sqrt{2}} \ket{-}
+        \otimes (
+        \ket{f(0)\rangle - |f(1)}
+        )
+        $$
+
+
+      </section>
+
+      <section>
+        <h2>$\ket{\Psi_4}$ - Superposition</h2>
+
+        Constant:
+        $$
+        \ket{\psi_3} =
+        \frac{1}{\sqrt{2}} \ket{+}
+        \otimes (
+        \ket{f(0)\rangle - |1 \oplus f(0)}
+        )
+        $$
+        $$
+        \ket{\psi_4} =
+        \frac{1}{\sqrt{2}} \ket{0} \otimes
+        (\ket{f(0)\rangle - |1 \oplus f(0)})
+        $$
+
+        Balanced:
+        $$
+        \ket{\psi_3} =
+        \frac{1}{\sqrt{2}} \ket{-}
+        \otimes (
+        \ket{f(0)\rangle - |f(1)}
+        )
+        $$
+        $$
+        \ket{\psi_4} =
+        \frac{1}{\sqrt{2}} \ket{1} \otimes
+        (\ket{f(0)\rangle - |f(1)})
+        $$
+      </section>
+
+      <section>
+        <h2>$\ket{\Psi_5}$ - Measurement</h2>
+        <img src="assets/deutsch-circuit.png">
+      </section>
+    </section>
+
+    <section>
+      <h2>The phase kickback trick</h2>
+    </section>
+
+    <section>
+      <h2>The Deutsch-Josza algorithm</h2>
+      <img src="assets/d-j.png">
+    </section>
+
+    <!--
+    Q&A
+    -->
+    <section>
+      <h2>Q&A</h2>
+    </section>
+
+    <!--
+    Materials
+    -->
+    <section>
+      <section>
+        <h2>Useful Materials</h2>
+      </section>
+      <section>
+        <h2>Internet</h2>
+        <ul>
+          <li>
+            This presentation done right:
+            <a href="https://youtu.be/F_Riqjdh2oM">
+              Quantum Computing for Computer Scientists
+            </a>
+            <br>
+            <i style="text-align: right; display: block;">Andrew Helwer</i>
+          </li>
+          <li>
+            Python implementation:
+            <a href="http://dkopczyk.quantee.co.uk/deutschs-algorithm/#id656400987">
+              Quantum algorithms: Deutsch’s algorithm
+            </a>
+            <br>
+            <i style="text-align: right; display: block;">Dawid Kopczyk</i>
+          </li>
+          <li>
+            Math behind the algorithm, including the "phase kickback trick":
+            <a href="https://www.people.vcu.edu/~sgharibian/courses/CMSC491/notes/Lecture%206%20-%20Deutsch's%20algorithm.pdf">
+              Deutsch’s Algorithm
+            </a>
+            <br>
+            <i style="text-align: right; display: block;">Sevag Gharibian</i>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Book</h2>
+        <ul>
+          <li>
+            Quantum computation bible:
+            <a href="https://www.amazon.com/Quantum-Computation-Information-10th-Anniversary/dp/1107002176?tag=duckduckgo-d-20">
+              Quantum Computation and Quantum Information
+            </a>
+            <br>
+            <i style="text-align: right; display: block;">Michael A. Nielsen, Isaac L. Chuang</i>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {src: '../../plugin/zoom-js/zoom.js', async: true},
+            {src: '../../plugin/math/math.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ],
+        // Parallax background image
+        parallaxBackgroundImage: 'assets/space_dim.jpg',
+
+        // Parallax background size
+        parallaxBackgroundSize: '2420px', // CSS syntax, e.g. "2100px 900px" - currently only pixels are supported (don't use % or auto)
+
+        // Number of pixels to move the parallax background per slide
+        // - Calculated automatically unless specified
+        // - Set to 0 to disable movement along an axis
+        parallaxBackgroundHorizontal: 50,
+        parallaxBackgroundVertical: 10
+    });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+</body>
 </html>
