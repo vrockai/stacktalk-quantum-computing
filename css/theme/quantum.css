@@ -286,12 +286,19 @@ body {
   margin-top: 4rem;
 }
 
+.reveal .m-t-0 {
+  margin-top: 0;
+}
+
+.reveal .m-l-0 {
+  margin-left: 0;
+}
+
 .reveal .m-r-xl {
   margin-right: 4rem;
 }
 
-
-.reveal .strike {
+.reveal .fragment.strike.visible {
   text-decoration: line-through;
 }
 
@@ -314,3 +321,12 @@ body {
 .reveal .w-50 {
   width: 40%;
 }
+
+.reveal h3 {
+  font-size: 2.5rem;
+}
+
+.reveal ul.pointless {
+  list-style: none;
+}
+

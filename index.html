@@ -49,14 +49,13 @@
   \newcommand{\ket}[1]{ \mathbf{|#1\rangle} }
   $
   <div class="slides">
-
-
-
-
     <section>
       <h1>Quantum Computing Demystified</h1>
-      <h2 class="fragment">It's just math<span class="fragment">, seriously</span><span class="fragment">, it's just math</span></h2>
-      <h4>by <a href="https://vrockai.github.io">Viliam Rockai</a></h4>
+      <h3 class="fragment">It's just math<span class="fragment">, seriously</span><span class="fragment">, it's just a ton of math</span>
+      </h3>
+      <p class="fragment">
+        by <a href="https://vrockai.github.io">Viliam Rockai</a>
+      </p>
     </section>
 
     <!--
@@ -66,10 +65,27 @@
       <section>
         <h2>whoami</h2>
         <ul>
-          <li>Studied AI</li>
-          <li>Work at DNAstack</li>
-          <li>Like to code intuitive code</li>
-          <li>Like to get familiar with weird stuff</li>
+          <li class="fragment pointless">
+            <img class="m-r-xl a-v-m" height="70rem" src="assets/dnastack.png">
+            <img class="fragment a-v-m" height="60rem" src="assets/redhat.png">
+          </li>
+
+          <li class="fragment">
+            PhD in Artificial Intelligence: <i>Automatic discovery of concepts in documents written in natural
+            language</i>
+          </li>
+
+          <li class="fragment">
+            Had been an <a href="https://youtu.be/n0KXGycPTQY">avid musician</a> for a long time
+          </li>
+
+          <li class="fragment">
+            Like to get familiar with weird/unintuitive stuff like <i>Quantum Mechanics</i> or <i>Functional Programming</i>
+          </li>
+
+          <li class="fragment">
+            TV (Star Trek), indie games (Natural Selection 2)
+          </li>
         </ul>
       </section>
 
@@ -79,11 +95,21 @@
       <section>
         <h2>Goals</h2>
 
-        <ol>
-          <li>Understand how quantum algorithms work <span class="fragment highlight-blue">under an hour!</span></li>
-          <li>Be able to run a quantum algorithm yourself <span class="fragment highlight-blue">on a real quantum computer!</span>
+        <p>
+          Distill the theoretical minimum to
+        </p>
+        <ul>
+          <li>Understand how a quantum algorithm works <span class="fragment highlight-blue">under an hour!</span></li>
+          <li>Be able to implement and execute a quantum algorithm yourself <span class="fragment highlight-blue">on a real quantum computer!</span>
           </li>
-        </ol>
+        </ul>
+
+        <h2 class="m-t-xl">Anti-goals</h2>
+
+        <ul>
+          <li>Explain QM weirdness like <span class="fragment strike">superposition</span>, entanglement, teleportation...</li>
+          <li>Mention Schrodinger's cat anywhere outside of this slide</li>
+        </ul>
       </section>
 
       <section data-background="https://media.giphy.com/media/TrDxCdtmdluP6/giphy.gif"></section>
@@ -109,13 +135,14 @@
     -->
     <section>
       <section>
-      <h2>Introduction</h2>
-      <p class="fragment">
-        $${\displaystyle i\hbar {\frac {d}{dt}}\vert \Psi (t)\rangle ={\hat {H}}\vert \Psi (t)\rangle }$$
-      </p>
-      <p class="fragment">
-        $${\displaystyle i\hbar {\frac {\partial }{\partial t}}\Psi (\mathbf {r} ,t)=\left[{\frac {-\hbar ^{2}}{2m}}\nabla ^{2}+V(\mathbf {r} ,t)\right]\Psi (\mathbf {r} ,t)}$$
-      </p>
+        <h2>Introduction</h2>
+        <p class="fragment">
+          $${\displaystyle i\hbar {\frac {d}{dt}}\vert \Psi (t)\rangle ={\hat {H}}\vert \Psi (t)\rangle }$$
+        </p>
+        <p class="fragment">
+          $${\displaystyle i\hbar {\frac {\partial }{\partial t}}\Psi (\mathbf {r} ,t)=\left[{\frac {-\hbar
+          ^{2}}{2m}}\nabla ^{2}+V(\mathbf {r} ,t)\right]\Psi (\mathbf {r} ,t)}$$
+        </p>
       </section>
       <section data-background="https://media.giphy.com/media/vKnmQ9Ky8wgTK/giphy.gif">
       </section>
@@ -129,21 +156,189 @@
         <h2>Math prerequisites</h2>
       </section>
       <section>
-        <h2 class="strike">Complex Numbers</h2>
+        <h2 class="fragment strike" data-fragment-index="1">Complex Numbers</h2>
 
-        <!--p>
-          We can deal without them today, but if you're into this, you better get familiar with them.
-        </p-->
+        <img class="fragment"
+             src="https://media.giphy.com/media/3zFcbgHoIXzykQc7vU/giphy.gif"
+             data-fragment-index="0">
       </section>
       <section>
         <h2>Matrix Multiplication</h2>
-      </section>
-      <section>
-        <h2>Addition modulo 2</h2>
 
         <p>
-        $\oplus$ is just another way to write XOR.
+          $c_{ij}=a_{i1}b_{1j}+\cdots +a_{im}b_{mj}=\sum _{k=1}^{m}a_{ik}b_{kj}$
         </p>
+
+        <p class="long-eq m-t-xl">
+          $$
+          \begin{bmatrix}
+          \color{r}{a_{11}} & \color{r}{a_{12}} & \color{r}{a_{13}} & \color{r}{a_{14}} \\
+          \color{b}{a_{21}} & \color{b}{a_{22}} & \color{b}{a_{23}} & \color{b}{a_{24}} \\
+          a_{31}  &           a_{32}  &           a_{33}  &           a_{34}  \\
+          \end{bmatrix}
+          \times
+          \begin{bmatrix}
+          \color{r}{b_{11}} & b_{12} & \color{b}{b_{13}} \\
+          \color{r}{b_{21}} & b_{22} & \color{b}{b_{23}} \\
+          \color{r}{b_{31}} & b_{32} & \color{b}{b_{33}} \\
+          \color{r}{b_{41}} & b_{42} & \color{b}{b_{43}} \\
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          \color{r}{c_{11}} & c_{12} &           c_{13} \\
+          c_{21}  & c_{22} & \color{b}{c_{23}} \\
+          \end{bmatrix}
+          $$
+        </p>
+
+        <p class="fragment">
+          $
+          \color{r}{
+          c_{11}=
+          a_{11}b_{11} +
+          a_{12}b_{21} +
+          a_{13}b_{31} +
+          a_{14}b_{41}
+          }
+          $
+        </p>
+
+        <p class="fragment">
+          $
+          \color{b}{
+          c_{23}=
+          a_{21}b_{13} +
+          a_{22}b_{23} +
+          a_{23}b_{33} +
+          a_{24}b_{43}
+          }
+          $
+        </p>
+
+      </section>
+
+      <section>
+        <h2>Tensor Product $\otimes$</h2>
+        <h3>Matrix multiplication on steroids</h3>
+
+        <p class="long-eq">
+          $
+          {
+          \begin{bmatrix}
+          \color{r}{a_{11}} & a_{12} \\
+          a_{21}  & a_{22} \\
+          \end{bmatrix}}
+
+          \otimes
+
+          \color{r}{
+          \begin{bmatrix}
+          b_{11} & b_{12} \\
+          b_{21} & b_{22} \\
+          \end{bmatrix}
+          }
+          \color{d}
+          =
+
+          {
+
+          \begin{bmatrix}
+          \color{r}
+          a_{11}{
+          \begin{bmatrix}b_{11} & b_{12} \\
+          b_{21} & b_{22} \\
+          \end{bmatrix}} &
+
+          \color{d}
+
+          a_{12}{\begin{bmatrix}b_{11} & b_{12} \\
+          b_{21} & b_{22} \\
+          \end{bmatrix}} \\
+
+          & \\
+          a_{21}{\begin{bmatrix}b_{11} & b_{12} \\
+          b_{21} & b_{22} \\
+          \end{bmatrix}} & a_{22}{\begin{bmatrix}b_{11} & b_{12} \\
+          b_{21} & b_{22} \\
+          \end{bmatrix}} \\
+          \end{bmatrix}}
+          $
+        </p>
+        <p class="long-eq m-t-xl">
+          $
+          =
+          {
+          \begin{bmatrix}
+          \color{r} a_{11}b_{11} & \color{r} a_{11}b_{12} & a_{12}b_{11} & a_{12}b_{12} \\
+          \color{r} a_{11}b_{21} & \color{r} a_{11}b_{22} & a_{12}b_{21} & a_{12}b_{22} \\
+          a_{21}b_{11} & a_{21}b_{12} & a_{22}b_{11} & a_{22}b_{12} \\
+          a_{21}b_{21} & a_{21}b_{22} & a_{22}b_{21} & a_{22}b_{22} \\
+          \end{bmatrix}
+          }$
+        </p>
+
+      </section>
+
+      <section>
+        <h2>Tensor Product $\otimes$</h2>
+        <h3>to remember</h3>
+
+        <p class="long-eq">
+          $
+          \begin{bmatrix}
+          \color{r} a_{11} \\
+          a_{21} \\
+          \end{bmatrix}
+
+          \otimes
+
+          \color{r}
+          \begin{bmatrix}
+          b_{11} \\
+          b_{21} \\
+          \end{bmatrix}
+          \color{d}
+
+          =
+
+          \begin{bmatrix}
+          \color{r}
+          a_{11}         {\begin{bmatrix}
+          b_{11} \\
+
+          b_{21} \\
+
+          \end{bmatrix}} \\
+
+          \color{d}
+
+          a_{21}         {\begin{bmatrix}
+          b_{11} \\
+
+          b_{21} \\
+
+          \end{bmatrix}}\\
+
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          \color{r} a_{11}b_{11} \\
+
+          \color{r} a_{11}b_{21} \\
+
+          a_{21}b_{11} \\
+
+          a_{21}b_{21} \\
+
+          \end{bmatrix}
+          $
+        </p>
+
+      </section>
+
+      <section>
+        <h2>Addition modulo 2 $\oplus$</h2>
+        <h3>better known as XOR</h3>
 
         $$
         \begin{array}{ccc}
@@ -155,12 +350,6 @@
         1 & 1 & 0 \\
         \end{array}
         $$
-      </section>
-
-      <section>
-        <h2>Tensor Product</h2>
-
-
       </section>
     </section>
 
@@ -191,7 +380,7 @@
         <h2>Coin Toss</h2>
 
         <p>
-          Two states: <span class="fragment highlight-blue">$heads$</span> and
+          Two states: <span class="fragment highlight-blue">$heads$</span> or
           <span class="fragment highlight-red">$tails$</span>
         </p>
 
@@ -212,17 +401,15 @@
           \end{cases}$
         </p>
 
-        <p class="fragment m-t-xl">
-          $toss$ ???
-        </p>
+        <span class="fragment m-t-xl" data-background="https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif"></span>
       </section>
 
       <section>
         <h2>QuCoin Toss</h2>
 
         <p>
-          Two states: <span class="fragment highlight-blue">$\ket{heads}$</span> and
-          <span class="fragment highlight-blue">$\ket{tails}$</span>
+          Two states: <span class="fragment highlight-blue">$\ket{heads}$</span> or
+          <span class="fragment highlight-red">$\ket{tails}$</span>
         </p>
 
         <p class="fragment">
@@ -235,7 +422,7 @@
         </p>
 
         <p class="fragment m-t-xl">
-          $\ket{toss} =
+          $M\ket{toss} =
           \begin{cases}
           \ket{heads},  & \text{50% of the time} \\[2ex]
           \ket{tails},  & \text{50% of the time}
@@ -245,6 +432,8 @@
         <p class="fragment m-t-xl">
           $\ket{toss} = \sqrt{P(heads)}\ket{heads} + \sqrt{P(tails)}\ket{tails}$
         </p>
+
+        <span class="fragment" data-background="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"></span>
       </section>
 
       <section>
@@ -281,55 +470,50 @@
           two-state quantum-mechanical system
         </p>
 
-        <div>
-          <div class="inline a-v-m m-r-xl">
-            <p class="fragment" data-fragment-index="0">
-              $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$
-            </p>
+        <p class="fragment" data-fragment-index="0">
+          $
+          \ket{\psi} = \color{b}\alpha\color{d} \ket{0} + \color{r}\beta\color{d} \ket{1}
+          =
+          \begin{bmatrix}
+          \color{b}\alpha \\
+          \color{r}\beta \\
+          \end{bmatrix}
+          $
+          <span class="fragment"  data-fragment-index="4">
+          $
+          =
+          \begin{bmatrix}
+          \color{b}\pm\sqrt{P(\ket{0})} \\
+          \color{r}\pm\sqrt{P(\ket{1})} \\
+          \end{bmatrix}
+          $
+        </span>
+        </p>
 
-            <p class="fragment m-t-xl" data-fragment-index="1">
-              $\lvert\alpha\rvert^2 + \lvert\beta\rvert^2 = 1$
-            </p>
-          </div>
-
-          <p class="fragment inline" data-fragment-index="2">
-          <span>
-            $
-            \ket{\psi} =
-            \begin{bmatrix}
-            \alpha \\
-            \beta \\
-            \end{bmatrix}
-            $
-          </span>
-            <span class="fragment" data-fragment-index="4">
-            $
-            =
-            \begin{bmatrix}
-            \sqrt{P(\ket{0})} \\
-            \sqrt{P(\ket{1})} \\
-            \end{bmatrix}
-            $
-          </span>
-          </p>
-        </div>
-
-        <div>
-          <p class="fragment inline m-r-xl" data-fragment-index="3">
-            $$
-            \ket{toss} =
-            \begin{bmatrix}
-            \sqrt{P(\ket{heads})} \\
-            \sqrt{P(\ket{tails})} \\
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-            \sqrt{\frac{1}{2}} \\
-            \sqrt{\frac{1}{2}} \\
-            \end{bmatrix}
-            $$
-          </p>
-        </div>
+        <p class="fragment" data-fragment-index="1">
+          $
+          \lvert\alpha\rvert^2 = P(\ket{0}), \lvert\beta\rvert^2 = P(\ket{1})
+          $
+        </p>
+        <p class="fragment" data-fragment-index="2">
+          $
+          \lvert\alpha\rvert^2 + \lvert\beta\rvert^2 = 1
+          $
+        </p>
+        <p class="fragment" data-fragment-index="3">
+          $
+          \ket{toss} =
+          \begin{bmatrix}
+          \pm\sqrt{P(\ket{heads})} \\
+          \pm\sqrt{P(\ket{tails})} \\
+          \end{bmatrix}
+          =
+          \begin{bmatrix}
+          \pm\sqrt{\frac{1}{2}} \\
+          \pm\sqrt{\frac{1}{2}} \\
+          \end{bmatrix}
+          $
+        </p>
       </section>
 
       <section>
@@ -420,6 +604,7 @@
         <h2>Quantum Logic Gates</h2>
         Must be a Unitary matrix!!!
       </section>
+
       <section>
         <h3>Not Gate</h3>
 
@@ -437,6 +622,7 @@
         \begin{bmatrix}\beta \\ \alpha\end{bmatrix}
         $$
       </section>
+
       <section>
         <h3>Hadamard Gate</h3>
 
@@ -727,13 +913,14 @@
       </section>
     </section>
 
+    <!--
+    Where to go next
+    -->
     <section>
-      <h2>The phase kickback trick</h2>
-    </section>
+      <h2>Where to go next</h2>
 
-    <section>
-      <h2>The Deutsch-Josza algorithm</h2>
-      <img src="assets/d-j.png">
+      <h3>The Deutsch-Josza algorithm</h3>
+      <img src="assets/d-j.png" height="350rem">
     </section>
 
     <!--
@@ -833,7 +1020,16 @@
         parallaxBackgroundVertical: 5
     });
 
-    Reveal.addEventListener( 'fragmentshown', function( event ) {
+    Reveal.addEventListener('fragmentshown', function(event) {
+        console.log(event.fragment.dataset);
+
+        if (event.fragment.dataset.background || event.fragment.dataset.background === "") {
+            Reveal.getCurrentSlide().dataset.backgroundImage = event.fragment.dataset.background;
+            Reveal.sync();
+        }
+    }, false);
+
+    Reveal.addEventListener('fragmentshown', function( event ) {
         // event.fragment = the fragment DOM element
         if(event.fragment.dataset.move) {
             console.log(event);
