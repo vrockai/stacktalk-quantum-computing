@@ -271,3 +271,46 @@ body {
 @media print {
   .backgrounds {
     background-color: #222; } }
+
+/* CUSTOM COLORS */
+.reveal .red {
+  color: #ff2c2d; }
+
+.reveal .green {
+  color: #17ff2e; }
+
+.reveal .blue {
+  color: #1b91ff; }
+
+.reveal .m-t-xl {
+  margin-top: 4rem;
+}
+
+.reveal .m-r-xl {
+  margin-right: 4rem;
+}
+
+
+.reveal .strike {
+  text-decoration: line-through;
+}
+
+.reveal .inline {
+  display: inline-block;
+}
+
+.reveal .pull-left {
+  float: right;
+}
+
+.reveal .pull-right {
+  float: right;
+}
+
+.reveal .a-v-m {
+  vertical-align: middle;
+}
+
+.reveal .w-50 {
+  width: 40%;
+}

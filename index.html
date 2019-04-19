@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>Quantum Computing TL;DR</title>
+  <title>Quantum Computing Demystified</title>
 
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/quantum.css">
+  <link rel="stylesheet" href="css/theme/qc.css">
 
   <!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -30,53 +31,77 @@
     .reveal blockquote {
       background-color: rgba(0, 0, 0, 0.85);
     }
+
+    .reveal .long-eq {
+      font-size: 1.75rem;
+    }
   </style>
 </head>
 <body>
 
 <div class="reveal">
   $
-  \definecolor{r}{RGB}{255,0,0}
-  \definecolor{g}{RGB}{0,255,0}
-  \definecolor{b}{RGB}{0,0,255}
+  \definecolor{r}{RGB}{255,44,45}
+  \definecolor{b}{RGB}{27,145,255}
+  \definecolor{g}{RGB}{23,255,45}
   \definecolor{d}{RGB}{255,255,255}
 
   \newcommand{\ket}[1]{ \mathbf{|#1\rangle} }
   $
   <div class="slides">
-    <!--
-    Title
-    -->
+
+
+
+
     <section>
-      <h1>Quantum Computing tl;dr</h1>
-      <h2><a href="https://vrockai.github.io">Viliam Rockai</a></h2>
+      <h1>Quantum Computing Demystified</h1>
+      <h2 class="fragment">It's just math<span class="fragment">, seriously</span><span class="fragment">, it's just math</span></h2>
+      <h4>by <a href="https://vrockai.github.io">Viliam Rockai</a></h4>
     </section>
 
     <!--
     About
     -->
     <section>
-      <h2>whoami</h2>
-      <ul>
-        <li>Studied AI</li>
-        <li>Work at DNAstack</li>
-        <li>Like to code intuitive code</li>
-        <li>Like to get familiar with weird stuff</li>
-      </ul>
-    </section>
+      <section>
+        <h2>whoami</h2>
+        <ul>
+          <li>Studied AI</li>
+          <li>Work at DNAstack</li>
+          <li>Like to code intuitive code</li>
+          <li>Like to get familiar with weird stuff</li>
+        </ul>
+      </section>
 
-    <!--
-    Agenda
-    -->
-    <section>
-      <h2>Agenda</h2>
-      <ol>
-        <li>Introduction</li>
-        <li>Math prerequisites</li>
-        <li>Qubit</li>
-        <li>Quantum logic gates</li>
-        <li>Deutsch's oracle</li>
-      </ol>
+      <!--
+      Goals
+      -->
+      <section>
+        <h2>Goals</h2>
+
+        <ol>
+          <li>Understand how quantum algorithms work <span class="fragment highlight-blue">under an hour!</span></li>
+          <li>Be able to run a quantum algorithm yourself <span class="fragment highlight-blue">on a real quantum computer!</span>
+          </li>
+        </ol>
+      </section>
+
+      <section data-background="https://media.giphy.com/media/TrDxCdtmdluP6/giphy.gif"></section>
+
+      <!--
+      Agenda
+      -->
+      <section>
+        <h2>Agenda</h2>
+
+        <ol>
+          <li>Introduction</li>
+          <li>Math prerequisites</li>
+          <li>Qubit</li>
+          <li>Quantum logic gates</li>
+          <li>Deutsch's oracle</li>
+        </ol>
+      </section>
     </section>
 
     <!--
@@ -104,11 +129,11 @@
         <h2>Math prerequisites</h2>
       </section>
       <section>
-        <h2 style="text-decoration: line-through;">Complex Numbers</h2>
+        <h2 class="strike">Complex Numbers</h2>
 
-        <p>
+        <!--p>
           We can deal without them today, but if you're into this, you better get familiar with them.
-        </p>
+        </p-->
       </section>
       <section>
         <h2>Matrix Multiplication</h2>
@@ -131,6 +156,12 @@
         \end{array}
         $$
       </section>
+
+      <section>
+        <h2>Tensor Product</h2>
+
+
+      </section>
     </section>
 
     <!--
@@ -143,30 +174,166 @@
       <section data-background="assets/trudeau.jpg" data-background-transition="zoom">
         <blockquote class="fragment" cite="https://www.scottaaronson.com/blog/?p=2694">
           <div>
-          "Regular computer bit is either a 1 or a 0, on or off. A quantum state can be much more complex than that,
-          because as we know [speeding up dramatically] things can be both particle and wave at the same times and the
-          uncertainty around quantum states [laughter] allows us to encode more information into a much smaller
-          computer."
+            "Regular computer bit is either a 1 or a 0, on or off. A quantum state can be much more complex than that,
+            because as we know things can be both particle and wave at the same times and the
+            uncertainty around quantum states allows us to encode more information into a much smaller
+            computer."
           </div>
           <div>
-          &nbsp;<i style="float: right;">Justin Trudeu</i>
+            &nbsp;<i class="pull-right">Justin Trudeu</i>
           </div>
         </blockquote>
       </section>
+
+      <section data-background="https://media.giphy.com/media/26ufc0OsEUTWhDw0E/giphy.gif"></section>
+
+      <section>
+        <h2>Coin Toss</h2>
+
+        <p>
+          Two states: <span class="fragment highlight-blue">$heads$</span> and
+          <span class="fragment highlight-red">$tails$</span>
+        </p>
+
+        <p class="fragment">
+          <span class="fragment highlight-blue">$P(heads) = \frac{1}{2}$</span>,
+          <span class="fragment highlight-red">$P(tails) = \frac{1}{2}$</span>
+        </p>
+
+        <p class="fragment">
+          $P(heads) + P(tails) = 1$
+        </p>
+
+        <p class="fragment m-t-xl">
+          $toss =
+          \begin{cases}
+          heads,  & \text{50% of the time} \\[2ex]
+          tails,  & \text{50% of the time}
+          \end{cases}$
+        </p>
+
+        <p class="fragment m-t-xl">
+          $toss$ ???
+        </p>
+      </section>
+
+      <section>
+        <h2>QuCoin Toss</h2>
+
+        <p>
+          Two states: <span class="fragment highlight-blue">$\ket{heads}$</span> and
+          <span class="fragment highlight-blue">$\ket{tails}$</span>
+        </p>
+
+        <p class="fragment">
+          <span class="fragment highlight-blue">$P(heads) = \frac{1}{2}$</span>,
+          <span class="fragment highlight-red">$P(tails) = \frac{1}{2}$</span>
+        </p>
+
+        <p class="fragment">
+          $P(heads) + P(tails) = 1$
+        </p>
+
+        <p class="fragment m-t-xl">
+          $\ket{toss} =
+          \begin{cases}
+          \ket{heads},  & \text{50% of the time} \\[2ex]
+          \ket{tails},  & \text{50% of the time}
+          \end{cases}$
+        </p>
+
+        <p class="fragment m-t-xl">
+          $\ket{toss} = \sqrt{P(heads)}\ket{heads} + \sqrt{P(tails)}\ket{tails}$
+        </p>
+      </section>
+
+      <section>
+        <h2>Coin vs Qucoin Toss</h2>
+
+        <table>
+          <thead>
+          <th></th>
+          <th>Coin</th>
+          <th>Qucoin</th>
+          </thead>
+          <tr>
+            <td>States</td>
+            <td>$heads, tails$</td>
+            <td>$\ket{heads}, \ket{tails}$</td>
+          </tr>
+          <tr>
+            <td>Toss</td>
+            <td>ignored</td>
+            <td>essential part</td>
+          </tr>
+          <tr>
+            <td>Result</td>
+            <td>look at</td>
+            <td>measure</td>
+          </tr>
+        </table>
+      </section>
+
       <section>
         <h2>Qubit</h2>
 
-        $$
-        \alpha\ket{0} + \beta\ket{1}
-        $$
+        <p>
+          two-state quantum-mechanical system
+        </p>
 
-        $$
-        \begin{bmatrix}
-        \alpha \\
-        \beta \\
-        \end{bmatrix}
-        $$
+        <div>
+          <div class="inline a-v-m m-r-xl">
+            <p class="fragment" data-fragment-index="0">
+              $\ket{\psi} = \alpha\ket{0} + \beta\ket{1}$
+            </p>
 
+            <p class="fragment m-t-xl" data-fragment-index="1">
+              $\lvert\alpha\rvert^2 + \lvert\beta\rvert^2 = 1$
+            </p>
+          </div>
+
+          <p class="fragment inline" data-fragment-index="2">
+          <span>
+            $
+            \ket{\psi} =
+            \begin{bmatrix}
+            \alpha \\
+            \beta \\
+            \end{bmatrix}
+            $
+          </span>
+            <span class="fragment" data-fragment-index="4">
+            $
+            =
+            \begin{bmatrix}
+            \sqrt{P(\ket{0})} \\
+            \sqrt{P(\ket{1})} \\
+            \end{bmatrix}
+            $
+          </span>
+          </p>
+        </div>
+
+        <div>
+          <p class="fragment inline m-r-xl" data-fragment-index="3">
+            $$
+            \ket{toss} =
+            \begin{bmatrix}
+            \sqrt{P(\ket{heads})} \\
+            \sqrt{P(\ket{tails})} \\
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+            \sqrt{\frac{1}{2}} \\
+            \sqrt{\frac{1}{2}} \\
+            \end{bmatrix}
+            $$
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>$\ket{0}$ and $\ket{1}$</h2>
         $$
         \ket{0} =
         \begin{bmatrix}
@@ -191,9 +358,57 @@
         \ket{1}
         $$
       </section>
+
       <section>
-        <h3>Bloch Sphere</h3>
-        <img src="assets/bloch2.svg" alt="Bloch Sphere" style="width: 35rem;">
+        <h2>More Qubits</h2>
+
+        <p>
+          $$
+          \ket{00} =
+          \ket{0} \otimes \ket{0} =
+          \begin{bmatrix}
+          1 \\
+          0 \\
+          \end{bmatrix}
+          \otimes
+          \begin{bmatrix}
+          1 \\
+          0 \\
+          \end{bmatrix}
+          =
+
+          \begin{bmatrix}
+          1 \\
+          0 \\
+          0 \\
+          0 \\
+          \end{bmatrix}
+          $$
+        </p>
+
+        <p>
+          $$
+          \ket{10} =
+          \ket{1} \otimes \ket{0} =
+          \begin{bmatrix}
+          0 \\
+          1 \\
+          \end{bmatrix}
+          \otimes
+          \begin{bmatrix}
+          1 \\
+          0 \\
+          \end{bmatrix}
+          =
+
+          \begin{bmatrix}
+          0 \\
+          0 \\
+          1 \\
+          0 \\
+          \end{bmatrix}
+          $$
+        </p>
       </section>
     </section>
 
@@ -404,35 +619,37 @@
 
         <h3>Case 1: constant $f(x)$</h3>
 
-        $$
-        \ket{\psi_3} =
-        \frac{1}{2}
-        (
-        \ket{0} \ket{f(0)} -
-        \ket{0} \ket{1  \oplus f(0)} +
-        \ket{1} \ket{f(0)} -
-        \ket{1} \ket{1  \oplus f(0)}
-        )
-        \\
-        = \frac{1}{2}
-        (
-        (\ket{0} + \ket{1}) \otimes \ket{f(0)} -
-        (\ket{0} + \ket{1}) \otimes \ket{1 \oplus f(0)}
-        )
-        \\
-        = \frac{1}{2}
-        (
-        (\ket{0} + \ket{1}) \otimes
-        (\ket{f(0)\rangle - |1 \oplus f(0)})
-        )
-        \\
-        = \frac{1}{\sqrt{2}} \ket{+}
-        \otimes (
-        \ket{f(0)\rangle - |1 \oplus f(0)}
-        )
-        $$
+        <div class="long-eq">
+          <p>
+            $\ket{\psi_3} = \frac{1}{2} (\ket{0}$
+            <span class="fragment highlight-red" data-fragment-index="1">$\ket{f(0)}$</span>
+            $- \ket{0}$
+            <span class="fragment highlight-blue" data-fragment-index="2">$\ket{1 \oplus f(0)}$</span>
+            $+ \ket{1}$
+            <span class="fragment highlight-red" data-fragment-index="1">$\ket{f(0)}$</span>
+            $- \ket{1}$
+            <span class="fragment highlight-blue" data-fragment-index="2">$\ket{1  \oplus f(0)}$</span>
+            $)$
+          </p>
+          <p class="fragment" data-fragment-index="3">
+            $= \frac{1}{2}($
+            <span class="fragment highlight-green" data-fragment-index="4">$(\ket{0} + \ket{1})$</span>
+            $\otimes \color{r}\ket{f(0)}\color{d} -$
+            <span class="fragment highlight-green" data-fragment-index="4">$(\ket{0} + \ket{1})$</span>
+            $\otimes \color{b}\ket{1 \oplus f(0)}\color{d})$
+          </p>
 
+          <p class="fragment" data-fragment-index="5">
+            $= \frac{1}{2} (
+            \color{g}(\ket{0} + \ket{1})\color{d} \otimes
+            (\color{r}\ket{f(0)}\color{d} - \color{b}\ket{1 \oplus f(0)}\color{d})
+            )$
+          </p>
 
+          <p class="fragment" data-fragment-index="6">
+            $= \frac{1}{\sqrt{2}} \ket{+} \otimes \color{r}\ket{f(0)}\color{d} - \color{b}\ket{1 \oplus f(0)}\color{d}$
+          </p>
+        </div>
       </section>
 
       <section>
@@ -470,8 +687,6 @@
         \ket{f(0)\rangle - |f(1)}
         )
         $$
-
-
       </section>
 
       <section>
@@ -617,6 +832,16 @@
         parallaxBackgroundHorizontal: 40,
         parallaxBackgroundVertical: 5
     });
+
+    Reveal.addEventListener( 'fragmentshown', function( event ) {
+        // event.fragment = the fragment DOM element
+        if(event.fragment.dataset.move) {
+            console.log(event);
+            var foo = document.getElementById("qcursor");
+            foo.classList.add(event.fragment.dataset.move);
+            console.log(foo.className);
+        }
+    } );
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
