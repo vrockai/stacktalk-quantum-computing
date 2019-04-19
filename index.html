@@ -218,6 +218,11 @@
       </section>
 
       <section>
+        <div class="fragment fade-out" data-fragment-index="1">
+          <img src="assets/yo.png"
+               class="fragment fade-left"
+               style="position: absolute; bottom: 0; right:0; z-index: 1;" data-fragment-index="0">
+        </div>
         <h2>Tensor Product $\otimes$</h2>
         <h3>Matrix multiplication on steroids</h3>
 
@@ -413,12 +418,12 @@
         </p>
 
         <p class="fragment">
-          <span class="fragment highlight-blue">$P(heads) = \frac{1}{2}$</span>,
-          <span class="fragment highlight-red">$P(tails) = \frac{1}{2}$</span>
+          <span class="fragment highlight-blue">$P(\ket{heads}) = \frac{1}{2}$</span>,
+          <span class="fragment highlight-red">$P(\ket{tails}) = \frac{1}{2}$</span>
         </p>
 
         <p class="fragment">
-          $P(heads) + P(tails) = 1$
+          $P(\ket{heads}) + P(\ket{tails}) = 1$
         </p>
 
         <p class="fragment m-t-xl">
@@ -430,10 +435,11 @@
         </p>
 
         <p class="fragment m-t-xl">
-          $\ket{toss} = \sqrt{P(heads)}\ket{heads} + \sqrt{P(tails)}\ket{tails}$
+          $\ket{toss} = \sqrt{P(\ket{heads})}\ket{heads} + \sqrt{P(\ket{tails})}\ket{tails}$
         </p>
 
-        <span class="fragment" data-background="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"></span>
+        <span class="fragment"
+              data-background="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"></span>
       </section>
 
       <section>
