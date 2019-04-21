@@ -274,13 +274,29 @@ body {
 
 /* CUSTOM COLORS */
 .reveal .red {
-  color: #ff2c2d; }
+  color: #ff2c2d;
+  border-color: #ff2c2d;
+}
 
 .reveal .green {
-  color: #17ff2e; }
+  color: #17ff2e;
+  border-color: #17ff2e;
+}
 
 .reveal .blue {
-  color: #1b91ff; }
+  color: #1b91ff;
+  border-color: #1b91ff;
+}
+
+.reveal .white {
+  color: #fff;
+  border-color: #fff;
+}
+
+.reveal .highlight {
+  color: #ffff91;
+  border-color: #ffff91;
+}
 
 .reveal .m-t-xl {
   margin-top: 4rem;
@@ -330,3 +346,57 @@ body {
   list-style: none;
 }
 
+.reveal .slides section span {
+  transition: all 0.4s ease-out;
+  opacity: 1;
+}
+
+.reveal .slides section .fragment.disappear {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal .slides section .fragment.disappear.visible {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
+.reveal .slides section .fragment.appear {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
+.reveal .slides section .fragment.appear.visible {
+  opacity: 1;
+  visibility: inherit;
+  display: inline-block;
+}
+
+.reveal h3 {
+  margin-bottom: 3rem;
+}
+
+.reveal .row {
+  display: flex;
+  /*align-items: center;*/
+}
+
+.reveal .col {
+  flex: 1;
+}
+
+.reveal table td {
+  text-align: center;
+}
+
+.reveal .highlight-1 .q-line > div:nth-child(1),
+.reveal .highlight-1 .q-line > div:nth-child(2) {
+  border-color: red;
+  color: red;
+}
+
+.reveal section > section.push {
+  margin-top: 4rem;
+}

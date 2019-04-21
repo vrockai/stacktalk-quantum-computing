@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,6 +12,8 @@
 
   <!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 
   <!-- Printing and PDF exports -->
   <script>
@@ -49,6 +51,9 @@
   \newcommand{\ket}[1]{ \mathbf{|#1\rangle} }
   $
   <div class="slides">
+    <!--
+    Title
+    -->
     <section>
       <h1>Quantum Computing Demystified</h1>
       <h3 class="fragment">It's just math<span class="fragment">, seriously</span><span class="fragment">, it's just a ton of math</span>
@@ -66,8 +71,8 @@
         <h2>whoami</h2>
         <ul>
           <li class="fragment pointless">
-            <img class="m-r-xl a-v-m" height="70rem" src="assets/dnastack.png">
-            <img class="fragment a-v-m" height="60rem" src="assets/redhat.png">
+            <img alt="DNAstack logo" class="m-r-xl a-v-m" height="70rem" src="assets/dnastack.png">
+            <img alt="Red hat logo" class="fragment a-v-m" height="60rem" src="assets/redhat.png">
           </li>
 
           <li class="fragment">
@@ -80,7 +85,8 @@
           </li>
 
           <li class="fragment">
-            Like to get familiar with weird/unintuitive stuff like <i>Quantum Mechanics</i> or <i>Functional Programming</i>
+            Like to get familiar with weird/unintuitive stuff like <i>Quantum Mechanics</i> or <i>Functional
+            Programming</i>
           </li>
 
           <li class="fragment">
@@ -107,7 +113,9 @@
         <h2 class="m-t-xl">Anti-goals</h2>
 
         <ul>
-          <li>Explain QM weirdness like <span class="fragment strike">superposition</span>, entanglement, teleportation...</li>
+          <li>Explain QM weirdness like <span class="fragment strike">superposition</span>, entanglement,
+            teleportation...
+          </li>
           <li>Mention Schrodinger's cat anywhere outside of this slide</li>
         </ul>
       </section>
@@ -160,8 +168,83 @@
 
         <img class="fragment"
              src="https://media.giphy.com/media/3zFcbgHoIXzykQc7vU/giphy.gif"
+             alt="Futurama gif"
              data-fragment-index="0">
       </section>
+
+      <section>
+        <h2>Matrix properties</h2>
+
+        <h3>Transposition</h3>
+        <p>
+          $
+          M^T
+          =
+          \begin{bmatrix}1&2&3\\0&-6&7\end{bmatrix}^{\mathrm {T} }
+          =
+          \begin{bmatrix}1&0\\2&-6\\3&7\end{bmatrix}
+          $
+        </p>
+      </section>
+
+      <section>
+        <h2>Matrix properties</h2>
+
+        <h3>Identity</h3>
+        <p>
+          $
+          {\mathbf {I} _{n}={\begin{bmatrix}1&0&\cdots &0\\0&1&\cdots &0\\\vdots &\vdots &\ddots &\vdots \\0&0&\cdots
+          &1\end{bmatrix}}}
+          $
+        </p>
+      </section>
+
+      <section>
+        <h2>Matrix properties</h2>
+
+        <h3>Unitary matrix</h3>
+
+        <p>
+          M is unitary if its conjugate transpose $M^\dagger$ is also its inverse
+        </p>
+        <p>
+          $
+          M^{\dagger }M = I.
+          $
+        </p>
+
+        <div class="fragment">
+          <p>
+            If $M$ is a real number matrix
+          </p>
+          <p>
+            $
+            M^{T}M = I.
+            $
+          </p>
+        </div>
+        <p class="fragment">
+          $
+          \begin{bmatrix}
+          1 & 0 \\
+          0 & -1 \\
+          \end{bmatrix}
+
+          \begin{bmatrix}
+          1 & 0 \\
+          0 & -1 \\
+          \end{bmatrix}
+
+          =
+
+          \begin{bmatrix}
+          1 & 0 \\
+          0 & 1 \\
+          \end{bmatrix}
+          $
+        </p>
+      </section>
+
       <section>
         <h2>Matrix Multiplication</h2>
 
@@ -174,7 +257,7 @@
           \begin{bmatrix}
           \color{r}{a_{11}} & \color{r}{a_{12}} & \color{r}{a_{13}} & \color{r}{a_{14}} \\
           \color{b}{a_{21}} & \color{b}{a_{22}} & \color{b}{a_{23}} & \color{b}{a_{24}} \\
-          a_{31}  &           a_{32}  &           a_{33}  &           a_{34}  \\
+          a_{31} & a_{32} & a_{33} & a_{34} \\
           \end{bmatrix}
           \times
           \begin{bmatrix}
@@ -185,8 +268,8 @@
           \end{bmatrix}
           =
           \begin{bmatrix}
-          \color{r}{c_{11}} & c_{12} &           c_{13} \\
-          c_{21}  & c_{22} & \color{b}{c_{23}} \\
+          \color{r}{c_{11}} & c_{12} & c_{13} \\
+          c_{21} & c_{22} & \color{b}{c_{23}} \\
           \end{bmatrix}
           $$
         </p>
@@ -221,18 +304,19 @@
         <div class="fragment fade-out" data-fragment-index="1">
           <img src="assets/yo.png"
                class="fragment fade-left"
+               alt="Dawg"
                style="position: absolute; bottom: 0; right:0; z-index: 1;" data-fragment-index="0">
         </div>
         <h2>Tensor Product $\otimes$</h2>
+        <!-- https://en.wikipedia.org/wiki/Kronecker_product -->
         <h3>Matrix multiplication on steroids</h3>
 
         <p class="long-eq">
           $
-          {
           \begin{bmatrix}
           \color{r}{a_{11}} & a_{12} \\
-          a_{21}  & a_{22} \\
-          \end{bmatrix}}
+          a_{21} & a_{22} \\
+          \end{bmatrix}
 
           \otimes
 
@@ -308,7 +392,7 @@
 
           \begin{bmatrix}
           \color{r}
-          a_{11}         {\begin{bmatrix}
+          a_{11} {\begin{bmatrix}
           b_{11} \\
 
           b_{21} \\
@@ -317,7 +401,7 @@
 
           \color{d}
 
-          a_{21}         {\begin{bmatrix}
+          a_{21} {\begin{bmatrix}
           b_{11} \\
 
           b_{21} \\
@@ -365,6 +449,7 @@
       <section>
         <h2>Qubit</h2>
       </section>
+
       <section data-background="assets/trudeau.jpg" data-background-transition="zoom">
         <blockquote class="fragment" cite="https://www.scottaaronson.com/blog/?p=2694">
           <div>
@@ -401,12 +486,15 @@
         <p class="fragment m-t-xl">
           $toss =
           \begin{cases}
-          heads,  & \text{50% of the time} \\[2ex]
-          tails,  & \text{50% of the time}
+          heads, & \text{50% of the time} \\[2ex]
+          tails, & \text{50% of the time}
           \end{cases}$
         </p>
 
-        <span class="fragment m-t-xl" data-background="https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif"></span>
+        <span class="fragment m-t-xl"
+              data-background="https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif"></span>
+        <span class="fragment"
+              data-background=""></span>
       </section>
 
       <section>
@@ -429,8 +517,8 @@
         <p class="fragment m-t-xl">
           $M\ket{toss} =
           \begin{cases}
-          \ket{heads},  & \text{50% of the time} \\[2ex]
-          \ket{tails},  & \text{50% of the time}
+          \ket{heads}, & \text{50% of the time} \\[2ex]
+          \ket{tails}, & \text{50% of the time}
           \end{cases}$
         </p>
 
@@ -440,6 +528,8 @@
 
         <span class="fragment"
               data-background="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"></span>
+        <span class="fragment"
+              data-background=""></span>
       </section>
 
       <section>
@@ -447,9 +537,11 @@
 
         <table>
           <thead>
-          <th></th>
-          <th>Coin</th>
-          <th>Qucoin</th>
+          <tr>
+            <th></th>
+            <th>Coin</th>
+            <th>Qucoin</th>
+          </tr>
           </thead>
           <tr>
             <td>States</td>
@@ -485,7 +577,7 @@
           \color{r}\beta \\
           \end{bmatrix}
           $
-          <span class="fragment"  data-fragment-index="4">
+          <span class="fragment" data-fragment-index="4">
           $
           =
           \begin{bmatrix}
@@ -608,61 +700,343 @@
     <section>
       <section>
         <h2>Quantum Logic Gates</h2>
-        Must be a Unitary matrix!!!
+      </section>
+
+      <section>
+        <h2>Digital Logic Gates</h2>
+        <h3>And</h3>
+
+        <p>
+          Performs a logical operation on one or more binary inputs and produces a
+          <span class="fragment highlight-red">single binary output</span>
+        </p>
+
+        <div class="row">
+          <div class="col">
+            <div class="q-circuit">
+              <div class="q-line">
+                <div class="q-input">
+                  A
+                </div>
+                <div class="q-wire">
+
+                </div>
+                <div class="q-empty">
+                  <div class="q-gate q-rowspan-2">
+                    &
+                  </div>
+                </div>
+                <div class="q-empty">
+                  <div class="q-rowspan-2">
+                    <div class="q-wire">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="q-empty">
+                  <div class="q-rowspan-2">
+                    <div class="q-output">
+                      A & B
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="q-line">
+                <div class="q-input">
+                  B
+                </div>
+                <div class="q-wire">
+
+                </div>
+                <div class="q-empty">
+
+                </div>
+                <div class="q-empty">
+
+                </div>
+                <div class="q-empty">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <table>
+              <thead>
+              <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>A & B</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Quantum Logic Gates</h2>
+
+        <div class="row m-t-xl">
+          <div class="col">
+            <ul>
+              <li>Unitary matrix
+                <ul>
+                  <li>Preserves the norm</li>
+                  <li>$\sum{P} = 1$</li>
+                </ul>
+              </li>
+              <li>Reversible
+                <ul>
+                  <li class="fragment highlight-red">Same number of inputs and outputs</li>
+                  <li>$2^{n}\times2^{n}$</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <div class="q-circuit">
+              <div class="q-line">
+                <div class="q-input">
+                  $\ket{\psi_1}$
+                </div>
+
+                <div class="q-wire">
+
+                </div>
+
+                <div class="q-gate">
+                  $G_1$
+                </div>
+
+                <div class="q-wire">
+
+                </div>
+
+                <div class="q-output">
+                  $\ket{\psi_2}$
+                </div>
+              </div>
+            </div>
+
+            <div class="q-circuit">
+              <div class="q-line">
+                <div class="q-input">
+                  $\ket{x}$
+                </div>
+
+                <div class="q-wire">
+
+                </div>
+
+                <div class="q-empty q-wide">
+                  <div class="q-gate q-rowspan-2">
+                    $G_2$
+                  </div>
+                </div>
+
+                <div class="q-wire">
+
+                </div>
+
+                <div class="q-output">
+                  $\ket{x'}$
+                </div>
+              </div>
+
+              <div class="q-line">
+                <div class="q-input">
+                  $\ket{y}$
+                </div>
+                <div class="q-wire">
+
+                </div>
+
+                <div class="q-empty q-wide">
+
+                </div>
+                <div class="q-wire">
+
+                </div>
+
+                <div class="q-output">
+                  $\ket{y'}$
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </section>
 
       <section>
         <h3>Not Gate</h3>
 
-        $$
-        X \equiv
-        \begin{bmatrix}
-        0 & 1 \\
-        1 & 0 \\
-        \end{bmatrix}
-        $$
+        <div class="q-line">
+          <div class="q-input">
+            $\ket{0}$
+          </div>
+          <div class="q-wire"></div>
 
-        $$
-        X\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
-        \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}\beta \\ \alpha\end{bmatrix} =
-        \begin{bmatrix}\beta \\ \alpha\end{bmatrix}
-        $$
+          <div class="q-gate">
+            $X$
+          </div>
+
+          <div class="q-wire"></div>
+
+          <div class="q-output">
+            $\ket{1}$
+          </div>
+        </div>
+
+        <div>
+          $
+          X \equiv
+          \begin{bmatrix}
+          0 & 1 \\
+          1 & 0 \\
+          \end{bmatrix}
+          $
+        </div>
+        <div class="m-t-xl">
+          $
+          X\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
+          \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
+          \begin{bmatrix}\beta \\ \alpha\end{bmatrix}
+          $
+        </div>
+
       </section>
 
       <section>
-        <h3>Hadamard Gate</h3>
+        <h2>Hadamard Gate</h2>
 
-        $$
-        H \equiv \frac{1}{\sqrt{2}}
-        \begin{bmatrix}
-        1 & 1 \\
-        1 & -1 \\
+        <div class="q-line">
+          <div class="q-input">
+            $\ket{\psi_1}$
+          </div>
+          <div class="q-wire"></div>
 
-        \end{bmatrix}
-        $$
+          <div class="q-gate">
+            $H$
+          </div>
 
-        $$
-        H\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
-        \alpha\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
-        \beta\frac{\ket{0} - \ket{1}}{\sqrt{2}}
-        $$
+          <div class="q-wire"></div>
 
-        $$
-        H\ket{0} =
-        H\begin{bmatrix}1 \\ 0\end{bmatrix} =
-        1\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
-        0\frac{\ket{0} - \ket{1}}{\sqrt{2}} =
-        \frac{\ket{0} + \ket{1}}{\sqrt{2}}
-        $$
+          <div class="q-output">
+            $\ket{\psi_2}$
+          </div>
+        </div>
 
-        $$
-        H\ket{1} =
-        H\begin{bmatrix}0 \\ 1\end{bmatrix} =
-        0\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
-        1\frac{\ket{0} - \ket{1}}{\sqrt{2}} =
-        \frac{\ket{0} - \ket{1}}{\sqrt{2}}
-        $$
+        <div>
+          $
+          H \equiv \frac{1}{\sqrt{2}}
+          \begin{bmatrix}
+          1 & 1 \\
+          1 & -1 \\
+          \end{bmatrix}
+          $
+        </div>
 
+        <div class="m-t-xl">
+          $
+          H\begin{bmatrix}\alpha \\ \beta\end{bmatrix} =
+          \alpha\frac{\ket{0} + \ket{1}}{\sqrt{2}} +
+          \beta\frac{\ket{0} - \ket{1}}{\sqrt{2}}
+          $
+        </div>
+      </section>
+
+      <section>
+        <h2>Hadamard Gate</h2>
+        <h3>Properties</h3>
+
+        <div class="q-line">
+          <div class="q-input">
+            $\ket{\psi}$
+          </div>
+          <div class="q-wire"></div>
+
+          <div class="q-gate">
+            $H$
+          </div>
+
+          <div class="q-wire"></div>
+
+          <div class="q-gate">
+            $H$
+          </div>
+
+          <div class="q-wire"></div>
+
+          <div class="q-output">
+            $\ket{\psi}$
+          </div>
+        </div>
+
+        <div class="long-eq">
+          $
+          \color{r}H\ket{0}\color{d}
+          =
+          H\begin{bmatrix}
+          1 \\
+          0
+          \end{bmatrix}
+          =
+          \color{r}\frac{\ket{0} + \ket{1}}{\sqrt{2}}\color{d}
+          =
+          \begin{bmatrix}
+          \frac{1}{\sqrt{2}} \\
+          \frac{1}{\sqrt{2}}
+          \end{bmatrix}
+          =
+          \color{r}\ket{+}\color{d}
+          $
+        </div>
+
+        <div class="long-eq m-t-xl">
+          $
+          \color{b}H\ket{1}\color{d}
+          =
+          H\begin{bmatrix}
+          0 \\
+          1
+          \end{bmatrix}
+          =
+          \color{b}\frac{\ket{0} - \ket{1}}{\sqrt{2}}\color{d}
+          =
+          \begin{bmatrix}
+          \frac{1}{\sqrt{2}} \\
+          -\frac{1}{\sqrt{2}}
+          \end{bmatrix}
+          =
+          \color{b}\ket{-}\color{d}
+          $
+        </div>
       </section>
     </section>
 
@@ -672,25 +1046,35 @@
     <section>
       <section>
         <h2>Quantum Computing</h2>
-
       </section>
+
       <section>
         <h2>Deutsch's algorithm</h2>
+        <h3 class="fragment" data-fragment-index="0">The most useless algorithm ever</h3>
 
-        Not really useful. Artificial. Just to learn about QC.
+        <div class="fragment">
+          Deutsch’s algorithm determines whether
+        </div>
 
-        <p>
-          Deutsch’s algorithm determines whether a function <span class="fragment">$$f:\{0,1\}\rightarrow \{0,1\}$$</span> is balanced or constant.
-        </p>
+        <div class="fragment">
+          $f:\{0,1\}\rightarrow \{0,1\}$
+        </div>
 
-        <p>
-          <span class="fragment">Constant: $$f(0) = f(1)$$</span>
-          <span class="fragment">Balanced: $$f(0) \neq f(1)$$</span>
-        </p>
+        <div class="fragment">
+          is balanced or constant.
+        </div>
+
+        <div class="fragment m-t-xl">
+          <span class="m-r-xl">Constant: $f(0) = f(1)$</span>
+          <span>Balanced: $f(0) \neq f(1)$</span>
+        </div>
       </section>
+
       <section>
         <h2>The function</h2>
-        We consider the <b>function as an input</b> to the algorithm.
+        <h3>Classical approach</h3>
+
+        We consider the <b class="fragment highlight-blue">function to be the input</b>
 
         $$f(x) = 1$$
 
@@ -717,6 +1101,13 @@
         ,
         N_f^TN_f \neq I
         $$
+      </section>
+
+      <section>
+        <h2>The function</h2>
+        <h3>Smart approach</h3>
+
+        <img src="assets/circuit_qf-600x188.png" alt="Quantum circuit">
       </section>
 
       <section>
@@ -753,67 +1144,287 @@
 
       <section>
         <h2>Deutsch's algorithm circuit</h2>
-        <img src="assets/deutsch-circuit.png">
+
+        <div class="q-circuit">
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-empty q-wide">
+              <div class="q-gate q-rowspan-2">
+                <div class="q-label q-t-l">$x$</div>
+                <div class="q-label q-t-r">$x$</div>
+                <div class="q-label q-b-l">$y$</div>
+                <div class="q-label q-b-r">$y \oplus f(x)$</div>
+                $U_f$
+              </div>
+            </div>
+
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              <div class="q-icon-measure">
+                <div class="crop">
+                  <div class="display">
+                  </div>
+                </div>
+                <div class="tick">
+                  <span class="dot"></span>
+                  <span class="line"></span>
+                  <span class="cursor"></span>
+                </div>
+              </div>
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+          </div>
+
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $X$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-empty q-wide">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!--
+    Deutch's Algorithm Step
+    -->
+    <section>
+      <div id="deutsch" class="q-circuit q-tiny q-dim long-eq">
+        <div class="q-line">
+          <div class="q-input">
+            $\ket{0}$
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-gate">
+            $H$
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-empty q-wide">
+            <div class="q-gate q-rowspan-2">
+              <div class="q-label q-t-l">$x$</div>
+              <div class="q-label q-t-r">$x$</div>
+              <div class="q-label q-b-l">$y$</div>
+              <div class="q-label q-b-r">$y \oplus f(x)$</div>
+              $U_f$
+            </div>
+          </div>
+
+          <div class="q-wire">
+
+          </div>
+          <div class="q-gate">
+            $H$
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-gate">
+            <div class="q-icon-measure">
+              <div class="crop">
+                <div class="display">
+                </div>
+              </div>
+              <div class="tick">
+                <span class="dot"></span>
+                <span class="line"></span>
+                <span class="cursor"></span>
+              </div>
+            </div>
+          </div>
+          <div class="q-wire">
+
+          </div>
+        </div>
+
+        <div class="q-line">
+          <div class="q-input">
+            $\ket{0}$
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-gate">
+            $X$
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-gate">
+            $H$
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-empty q-wide">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+          <div class="q-wire">
+
+          </div>
+        </div>
+
+        <div class="q-line q-line-annotation">
+          <div class="q-empty"></div>
+          <div class="q-empty">$\uparrow\psi_0$</div>
+          <div class="q-empty"></div>
+          <div class="q-empty">$\uparrow\psi_1$</div>
+          <div class="q-empty"></div>
+          <div class="q-empty">$\uparrow\psi_2$</div>
+          <div class="q-empty q-wide"></div>
+          <div class="q-empty">$\uparrow\psi_3$</div>
+          <div class="q-empty"></div>
+          <div class="q-empty">$\uparrow\psi_4$</div>
+          <div class="q-empty"></div>
+          <div class="q-empty">$\uparrow\psi_5$</div>
+        </div>
+
+      </div>
+
+      <section data-state="highlight-0">
+        <h3>Initialization</h3>
+
+        <div>
+          $\ket{\Psi_0} = \ket{0} \ket{0}$
+        </div>
       </section>
 
-      <section data-transition="fade">
-        <h2>$\ket{\Psi_0}$ - Initialization</h2>
-        <img src="assets/deutsch-circuit.png">
+      <section data-state="highlight-1">
+        <h3>Qubit flip</h3>
 
-        $$
-        \ket{\Psi_0} = \ket{0} \ket{0}
-        $$
+        <div>
+          $\ket{\Psi_1} = \ket{0} \ket{1}$
+        </div>
       </section>
 
-      <section data-transition="fade">
-        <h2>$\ket{\Psi_1}$ - Qubit flip</h2>
-        <img src="assets/deutsch-circuit.png">
+      <section data-state="highlight-2">
+        <h3>Superposition</h3>
 
-        $$
-        \ket{\Psi_1} = \ket{0} \ket{1}
-        $$
+        <div>
+          $
+          \ket{\Psi_2} =
+          \frac{1}{2}
+          \left(
+          \ket{0}\ket{0} -
+          \ket{0}\ket{1} +
+          \ket{1}\ket{0} -
+          \ket{1}\ket{1}
+          \right)
+          $
+        </div>
       </section>
 
-      <section data-transition="fade">
-        <h2>$\ket{\Psi_2}$ - Superposition</h2>
-        <img src="assets/deutsch-circuit.png">
+      <section data-state="highlight-3">
+        <h3>Evaluation</h3>
 
-        $$
-        \ket{\Psi_2} =
-        \frac{1}{2}
-        \left(
-        \ket{0}\ket{0} -
-        \ket{0}\ket{1} +
-        \ket{1}\ket{0} -
-        \ket{1}\ket{1}
-        \right)
-        $$
+        <div class="long-eq">
+          $
+          \ket{\psi_3} =
+          \frac{1}{2}
+          (
+          \ket{0} \ket{f(0)} -
+          \ket{0} \ket{1 \oplus f(0)} +
+          \ket{1} \ket{f(1)} -
+          \ket{1} \ket{1 \oplus f(1)}
+          )
+          $
+        </div>
       </section>
 
-      <section>
-        <h2>$\ket{\Psi_3}$ - Evaluation</h2>
-        <img src="assets/deutsch-circuit.png">
-
-        $$
-        \ket{\psi_3} =
-        \frac{1}{2}
-        (
-        \ket{0} \ket{f(0)} -
-        \ket{0} \ket{1  \oplus f(0)} +
-        \ket{1} \ket{f(1)} -
-        \ket{1} \ket{1  \oplus f(1)}
-        )
-        $$
-      </section>
-
-      <section>
-        <h2>$\ket{\Psi_3}$ - Evaluation</h2>
-
-        <h3>Case 1: constant $f(x)$</h3>
+      <section class="push" data-state="highlight-3">
+        <h3>Evaluation / Case 1: constant $f(x)$</h3>
 
         <div class="long-eq">
           <p>
-            $\ket{\psi_3} = \frac{1}{2} (\ket{0}$
+            $\ket{\psi_3} = \frac{1}{2}
+            \bigl(
+            \ket{0}$
             <span class="fragment highlight-red" data-fragment-index="1">$\ket{f(0)}$</span>
             $- \ket{0}$
             <span class="fragment highlight-blue" data-fragment-index="2">$\ket{1 \oplus f(0)}$</span>
@@ -821,102 +1432,161 @@
             <span class="fragment highlight-red" data-fragment-index="1">$\ket{f(0)}$</span>
             $- \ket{1}$
             <span class="fragment highlight-blue" data-fragment-index="2">$\ket{1  \oplus f(0)}$</span>
-            $)$
+            $
+            \bigr)
+            $
           </p>
           <p class="fragment" data-fragment-index="3">
-            $= \frac{1}{2}($
-            <span class="fragment highlight-green" data-fragment-index="4">$(\ket{0} + \ket{1})$</span>
+            $
+            = \frac{1}{2}
+            \Bigl[
+            $
+            <span class="fragment highlight-green" data-fragment-index="4">$\bigl(\ket{0} + \ket{1}\bigr)$</span>
             $\otimes \color{r}\ket{f(0)}\color{d} -$
-            <span class="fragment highlight-green" data-fragment-index="4">$(\ket{0} + \ket{1})$</span>
-            $\otimes \color{b}\ket{1 \oplus f(0)}\color{d})$
+            <span class="fragment highlight-green" data-fragment-index="4">$\bigl(\ket{0} + \ket{1}\bigr)$</span>
+            $
+            \otimes \color{b}\ket{1 \oplus f(0)}\color{d}
+            \Bigr]
+            $
           </p>
 
           <p class="fragment" data-fragment-index="5">
-            $= \frac{1}{2} (
-            \color{g}(\ket{0} + \ket{1})\color{d} \otimes
-            (\color{r}\ket{f(0)}\color{d} - \color{b}\ket{1 \oplus f(0)}\color{d})
-            )$
+            $= \frac{1}{2}
+            \Bigl[
+            \color{g}\bigl(
+            \ket{0} + \ket{1}
+            \bigr) \color{d}
+
+            \otimes
+
+            \bigl(
+            \color{r}\ket{f(0)}\color{d} - \color{b}\ket{1 \oplus f(0)}\color{d}
+            \bigr)
+            \Bigr]
+            $
           </p>
 
           <p class="fragment" data-fragment-index="6">
-            $= \frac{1}{\sqrt{2}} \ket{+} \otimes \color{r}\ket{f(0)}\color{d} - \color{b}\ket{1 \oplus f(0)}\color{d}$
+            $= \frac{1}{\sqrt{2}} \ket{+} \otimes \color{r}\ket{f(0)}\color{d} - \color{b}\ket{1 \oplus
+            f(0)}\color{d}$
           </p>
         </div>
       </section>
 
-      <section>
-        <h2>$\ket{\Psi_3}$ - Evaluation</h2>
-        <h3>Case 2: balanced $f(x)$</h3>
+      <section class="push" data-state="highlight-3">
+        <h3>Evaluation / Case 2: balanced $f(x)$</h3>
 
-        $$
-        \definecolor{energy}{RGB}{114,0,172}
-        \definecolor{freq}{RGB}{45,177,93}
-
-        \color{energy}X
-        \ket{\psi_3} =
-        \frac{1}{2}
-        (
-        \ket{0} \ket{f(0)} -
-        \ket{0} \ket{f(1)} +
-        \ket{1} \ket{f(1)} -
-        \ket{1} \ket{f(0)}
-        )
-        \\
-        = \frac{1}{2}
-        (
-        (\ket{0} - \ket{1}) \otimes \ket{f(0)} -
-        (\ket{0} - \ket{1}) \otimes \ket{f(1)}
-        )
-        \\
-        = \frac{1}{2}
-        (
-        (\ket{0} - \ket{1}) \otimes
-        (\ket{f(0)\rangle - |f(1)})
-        )
-        \\
-        = \frac{1}{\sqrt{2}} \ket{-}
-        \otimes (
-        \ket{f(0)\rangle - |f(1)}
-        )
-        $$
+        <div class="long-eq">
+          <p>
+            $
+            \ket{\psi_3} =
+            \frac{1}{2}
+            \bigl(
+            \ket{0} $<span class="fragment highlight-red" data-fragment-index="0">$\ket{f(0)}$</span>$ -
+            \ket{0} $<span class="fragment highlight-blue" data-fragment-index="1">$\ket{f(1)}$</span>$ +
+            \ket{1} $<span class="fragment highlight-blue" data-fragment-index="1">$\ket{f(1)}$</span>$ -
+            \ket{1} $<span class="fragment highlight-red" data-fragment-index="0">$\ket{f(0)}$</span>$
+            \bigr)
+            $
+          </p>
+          <p class="fragment" data-fragment-index="2">
+            $
+            = \frac{1}{2}
+            \Bigl[
+            $<span class="fragment highlight-green" data-fragment-index="3">$\bigl(\ket{0} - \ket{1}\bigr)$</span>$
+            \otimes \color{r}\ket{f(0)}\color{d} -
+            $<span class="fragment highlight-green" data-fragment-index="3">$\bigl(\ket{0} - \ket{1}\bigr)$</span>$
+            \otimes \color{b}\ket{f(1)}\color{d}
+            \Bigr]
+            $
+          </p>
+          <p class="fragment" data-fragment-index="4">
+            $
+            = \frac{1}{2}
+            \Bigl[
+            \color{g} \bigl( \ket{0} - \ket{1} \bigr) \color{d}
+            \otimes
+            \bigl(
+            \color{r}\ket{f(0)}\color{d} - \color{b}\ket{f(1)}\color{d})
+            \bigr)
+            \Bigr]
+            $
+          </p>
+          <p class="fragment" data-fragment-index="5">
+            $
+            = \frac{1}{\sqrt{2}} \color{g}\ket{-}\color{d}
+            \otimes
+            \bigl(
+            \color{r}\ket{f(0)}\color{d} - \color{b}\ket{f(1)}\color{d}
+            \bigr)
+            $
+          </p>
+        </div>
       </section>
 
-      <section>
-        <h2>$\ket{\Psi_4}$ - Superposition</h2>
+      <section class="push" data-state="highlight-4">
+        <h3>Back to normal</h3>
 
-        Constant:
-        $$
-        \ket{\psi_3} =
-        \frac{1}{\sqrt{2}} \ket{+}
-        \otimes (
-        \ket{f(0)\rangle - |1 \oplus f(0)}
-        )
-        $$
-        $$
-        \ket{\psi_4} =
-        \frac{1}{\sqrt{2}} \ket{0} \otimes
-        (\ket{f(0)\rangle - |1 \oplus f(0)})
-        $$
+        <div class="long-eq">
+          Constant:
+          $$
+          \ket{\psi_3} =
+          \frac{1}{\sqrt{2}} \ket{+}
+          \otimes (
+          \ket{f(0)\rangle - |1 \oplus f(0)}
+          )
+          $$
+          $$
+          \ket{\psi_4} =
+          \frac{1}{\sqrt{2}} \ket{0} \otimes
+          (\ket{f(0)\rangle - |1 \oplus f(0)})
+          $$
 
-        Balanced:
-        $$
-        \ket{\psi_3} =
-        \frac{1}{\sqrt{2}} \ket{-}
-        \otimes (
-        \ket{f(0)\rangle - |f(1)}
-        )
-        $$
-        $$
-        \ket{\psi_4} =
-        \frac{1}{\sqrt{2}} \ket{1} \otimes
-        (\ket{f(0)\rangle - |f(1)})
-        $$
+          Balanced:
+          $$
+          \ket{\psi_3} =
+          \frac{1}{\sqrt{2}} \ket{-}
+          \otimes (
+          \ket{f(0)\rangle - |f(1)}
+          )
+          $$
+          $$
+          \ket{\psi_4} =
+          \frac{1}{\sqrt{2}} \ket{1} \otimes
+          (\ket{f(0)\rangle - |f(1)})
+          $$
+        </div>
       </section>
 
-      <section>
-        <h2>$\ket{\Psi_5}$ - Measurement</h2>
-        <img src="assets/deutsch-circuit.png">
+      <section data-state="highlight-5">
+        <h3>Measurement</h3>
+
+        <div class="long-eq">
+          <p class="fragment highlight-red" data-fragment-index="0">
+            Constant:
+          </p>
+          <p>
+            $
+            \ket{\psi_4} =
+            \frac{1}{\sqrt{2}} $<span class="fragment highlight-red" data-fragment-index="0">$\ket{0}$</span>$ \otimes
+            (\ket{f(0)\rangle - |1 \oplus f(0)})
+            $
+          </p>
+
+          <p class="fragment highlight-current-blue" data-fragment-index="1">
+            Balanced:
+          </p>
+          <p>
+            $
+            \ket{\psi_4} =
+            \frac{1}{\sqrt{2}} $<span class="fragment highlight-blue" data-fragment-index="1">$\ket{1}$</span>$
+            \otimes
+            (\ket{f(0)\rangle - |f(1)})
+            $
+          </p>
+        </div>
       </section>
+
     </section>
 
     <!--
@@ -926,7 +1596,7 @@
       <h2>Where to go next</h2>
 
       <h3>The Deutsch-Josza algorithm</h3>
-      <img src="assets/d-j.png" height="350rem">
+      <img src="assets/d-j.png" height="350rem" alt="Deutsch-Josza algorithm circuit">
     </section>
 
     <!--
@@ -990,6 +1660,7 @@
         </ul>
       </section>
     </section>
+
   </div>
 </div>
 
@@ -1026,7 +1697,7 @@
         parallaxBackgroundVertical: 5
     });
 
-    Reveal.addEventListener('fragmentshown', function(event) {
+    Reveal.addEventListener('fragmentshown', function (event) {
         console.log(event.fragment.dataset);
 
         if (event.fragment.dataset.background || event.fragment.dataset.background === "") {
@@ -1035,18 +1706,40 @@
         }
     }, false);
 
-    Reveal.addEventListener('fragmentshown', function( event ) {
+    for (var i = 0; i < 6; i++) {
+        registerHighlight(i);
+    }
+
+    Reveal.addEventListener('fragmentshown', function (event) {
         // event.fragment = the fragment DOM element
-        if(event.fragment.dataset.move) {
+        if (event.fragment.dataset.move) {
             console.log(event);
             var foo = document.getElementById("qcursor");
             foo.classList.add(event.fragment.dataset.move);
             console.log(foo.className);
         }
-    } );
+    });
+
+    function registerHighlight(i) {
+        var className = 'white';
+
+        Reveal.addEventListener('highlight-' + i, function (e) {
+            $('#deutsch .q-line > div').each(function () {
+                $(this).removeClass(className);
+            });
+            $('#deutsch .q-line > div:nth-child(' + (i * 2 + 1) + '), #deutsch .q-line > div:nth-child(' + (i * 2 + 2) + ')').each(function () {
+                $(this).addClass(className);
+            })
+        }, false);
+    }
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+
+
+
+
+
 </script>
 </body>
 </html>
