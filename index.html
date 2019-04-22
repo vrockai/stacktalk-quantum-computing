@@ -2224,8 +2224,6 @@
     });
 
     Reveal.addEventListener('fragmentshown', function (event) {
-        console.log(event.fragment.dataset);
-
         if (event.fragment.dataset.background || event.fragment.dataset.background === "") {
             Reveal.getCurrentSlide().dataset.backgroundImage = event.fragment.dataset.background;
             Reveal.sync();
@@ -2239,10 +2237,8 @@
     Reveal.addEventListener('fragmentshown', function (event) {
         // event.fragment = the fragment DOM element
         if (event.fragment.dataset.move) {
-            console.log(event);
-            var foo = document.getElementById("qcursor");
-            foo.classList.add(event.fragment.dataset.move);
-            console.log(foo.className);
+            var qcursor = document.getElementById("qcursor");
+            qcursor.classList.add(event.fragment.dataset.move);
         }
     });
 
