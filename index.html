@@ -37,6 +37,10 @@
     .reveal .long-eq {
       font-size: 1.75rem;
     }
+
+    .reveal .very-long-eq {
+      font-size: 1.25rem;
+    }
   </style>
 </head>
 <body>
@@ -67,6 +71,26 @@
     About
     -->
     <section>
+      <!--
+      Agenda
+      -->
+      <section>
+        <h2>Agenda</h2>
+
+        <ol>
+          <li>Introduction</li>
+          <li>Math prerequisites</li>
+          <li>Qubit</li>
+          <li>Quantum logic gates</li>
+          <li>Deutsch's oracle</li>
+          <li>Quantum supremacy</li>
+          <li>QA</li>
+        </ol>
+      </section>
+
+      <!--
+      Me
+      -->
       <section>
         <h2>whoami</h2>
         <ul>
@@ -121,21 +145,6 @@
       </section>
 
       <section data-background="https://media.giphy.com/media/TrDxCdtmdluP6/giphy.gif"></section>
-
-      <!--
-      Agenda
-      -->
-      <section>
-        <h2>Agenda</h2>
-
-        <ol>
-          <li>Introduction</li>
-          <li>Math prerequisites</li>
-          <li>Qubit</li>
-          <li>Quantum logic gates</li>
-          <li>Deutsch's oracle</li>
-        </ol>
-      </section>
     </section>
 
     <!--
@@ -491,11 +500,9 @@
           \end{cases}$
         </p>
 
-        <span class="fragment m-t-xl"
-              data-background="https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif"></span>
-        <span class="fragment"
-              data-background=""></span>
       </section>
+
+      <section data-background="https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif"></section>
 
       <section>
         <h2>QuCoin Toss</h2>
@@ -523,14 +530,11 @@
         </p>
 
         <p class="fragment m-t-xl">
-          $\ket{toss} = \sqrt{P(\ket{heads})}\ket{heads} + \sqrt{P(\ket{tails})}\ket{tails}$
+          $\ket{toss} = \overset{?}{P_\ket{heads}}\ket{heads} + \overset{?}{P_\ket{tails}}\ket{tails}$
         </p>
-
-        <span class="fragment"
-              data-background="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"></span>
-        <span class="fragment"
-              data-background=""></span>
       </section>
+
+      <section data-background="https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"></section>
 
       <section>
         <h2>Coin vs Qucoin Toss</h2>
@@ -1053,15 +1057,15 @@
         <h3 class="fragment" data-fragment-index="0">The most useless algorithm ever</h3>
 
         <div class="fragment">
-          Deutsch’s algorithm determines whether
-        </div>
-
-        <div class="fragment">
-          $f:\{0,1\}\rightarrow \{0,1\}$
-        </div>
-
-        <div class="fragment">
-          is balanced or constant.
+          <p>
+            Deutsch’s algorithm determines whether
+          </p>
+          <p>
+            $f:\{0,1\}\rightarrow \{0,1\}$
+          </p>
+          <p>
+            is balanced or constant.
+          </p>
         </div>
 
         <div class="fragment m-t-xl">
@@ -1071,81 +1075,291 @@
       </section>
 
       <section>
+        <div class="fragment q-overlay red">
+          2
+        </div>
+
         <h2>The function</h2>
         <h3>Classical approach</h3>
 
-        We consider the <b class="fragment highlight-blue">function to be the input</b>
+        <div class="q-circuit">
+          <div class="q-line">
+            <div class="q-input">
+              $x$
+            </div>
+            <div class="q-wire">
 
-        $$f(x) = 1$$
+            </div>
+            <div class="q-gate">
+              $f$
+            </div>
+            <div class="q-wire">
 
-        $$
-        \ket{0} =
-        \begin{bmatrix}
-        1\\
-        0\\
-        \end{bmatrix}
-        ,
-        \ket{1} =
-        \begin{bmatrix}
-        0\\
-        1\\
-        \end{bmatrix}
-        $$
+            </div>
+            <div class="q-output">
+              $f(x)$
+            </div>
+          </div>
+        </div>
 
-        $$
-        N_f =
-        \begin{bmatrix}
-        0 & 0\\
-        1 & 1\\
-        \end{bmatrix}
-        ,
-        N_f^TN_f \neq I
-        $$
+        <table class="long-eq">
+          <thead>
+          <tr>
+            <th>Input</th>
+            <th colspan="4">Function</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Constant</th>
+            <th>Constant</th>
+            <th>Balanced</th>
+            <th>Balanced</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>$x$</td>
+            <td>$f(x) = 0$</td>
+            <td>$f(x) = 1$</td>
+            <td>$f(x) = f(x)$</td>
+            <td>$f(x) = 0 \oplus f(x)$</td>
+          </tr>
+          <tr>
+            <td>$0$</td>
+            <td>$0$</td>
+            <td>$1$</td>
+            <td>$0$</td>
+            <td>$1$</td>
+          </tr>
+          <tr>
+            <td>$1$</td>
+            <td>$0$</td>
+            <td>$1$</td>
+            <td>$1$</td>
+            <td>$0$</td>
+          </tr>
+          </tbody>
+        </table>
       </section>
 
       <section>
         <h2>The function</h2>
-        <h3>Smart approach</h3>
+        <h3>Quantum attempt for constant</h3>
 
-        <img src="assets/circuit_qf-600x188.png" alt="Quantum circuit">
+        <div class="q-circuit">
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{x}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate very-long-eq">
+              $$
+              U_f =
+              \begin{bmatrix}
+              0 & 0\\
+              1 & 1\\
+              \end{bmatrix}
+              $$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-output">
+              $\ket{1}$
+            </div>
+          </div>
+        </div>
+
+        <div class="row long-eq">
+          <div class="col fragment">
+            <p>
+              $$
+              U_f\ket{0}
+              =
+              \begin{bmatrix}
+              0 & 0\\
+              1 & 1\\
+              \end{bmatrix}
+              \begin{bmatrix}
+              1 \\
+              0
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              0 \\
+              1
+              \end{bmatrix}
+              $$
+            </p>
+
+            <p>
+              $$
+              U_f\ket{1}
+              =
+              \begin{bmatrix}
+              0 & 0\\
+              1 & 1\\
+              \end{bmatrix}
+              \begin{bmatrix}
+              0 \\
+              1
+              \end{bmatrix}
+              =
+              \begin{bmatrix}
+              1 \\
+              0
+              \end{bmatrix}
+              $$
+            </p>
+          </div>
+
+          <div class="col fragment">
+            <p class="fragment highlight-red">
+              $$
+              \begin{align}
+
+              U_f U_{f}^T & =
+              \begin{bmatrix}
+              0 & 0\\
+              1 & 1\\
+              \end{bmatrix}
+              \begin{bmatrix}
+              0 & 1\\
+              0 & 1\\
+              \end{bmatrix} \\
+              & =
+              \begin{bmatrix}
+              0 & 0 \\
+              0 & 0 \\
+              \end{bmatrix}
+              \neq
+              I \\
+
+              \end{align}
+              $$
+            </p>
+          </div>
+        </div>
       </section>
 
       <section>
-        <h2>Classical algorithm</h2>
+        <div class="fragment q-overlay red">
+          2
+        </div>
+        <h2>The function</h2>
+        <h3>Quantum attempt for balanced</h3>
 
-        Needs $$n^2 - 1$$ evaluations.
+        <h4 class="long-eq">$f(x) = x$</h4>
+        <div class="q-circuit">
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{x}$
+            </div>
+            <div class="q-wire">
 
-        $$
-        n = 1
-        $$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-output">
+              $\ket{x}$
+            </div>
+          </div>
+        </div>
+
+        <h4 class="long-eq">$f(x) = 0 \oplus x$</h4>
+        <div class="q-circuit">
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{x}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $X$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-output">
+              $\ket{x \oplus f(x)}$
+            </div>
+          </div>
+        </div>
       </section>
 
       <section>
-        $$
-        U_f =
-        \begin{bmatrix}
-        0 & 1 & 0 & 0 \\
-        1 & 0 & 0 & 0 \\
-        0 & 0 & 0 & 1 \\
-        0 & 0 & 1 & 0 \\
-        \end{bmatrix}
-        $$
+        <h2>The Oracle</h2>
+        <div class="fragment q-overlay green">
+          1
+        </div>
+        <div class="fragment fade-out" data-fragment-index="2">
+          <img src="assets/travolta.gif"
+               class="fragment fade-right"
+               alt="Confused Travolta"
+               style="position: fixed; left: -0rem; scaleX(-1); bottom: -10rem; z-index: 1; height: 50rem;" data-fragment-index="0">
+        </div>
 
-        $$
-        U_f U_f =
-        \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        0 & 0 & 1 & 0 \\
-        0 & 0 & 0 & 1 \\
-        \end{bmatrix}
-        $$
+        <div class="fragment fade-out" data-fragment-index="2">
+          <img src="assets/deutsch.png"
+               class="fragment fade-left"
+               alt="David Deutsch"
+               style="position: fixed; bottom: -10rem; z-index: 1; height: 80rem;" data-fragment-index="1">
+        </div>
+
+        <div class="row fragment" data-fragment-index="2">
+          <div class="col">
+            <div class="q-circuit">
+              <div class="q-line">
+                <div class="q-wire"></div>
+                <div class="q-empty q-wide">
+                  <div class="q-gate q-rowspan-2">
+                    <div class="q-label q-t-l">$x$</div>
+                    <div class="q-label q-t-r">$x$</div>
+                    <div class="q-label q-b-l">$y$</div>
+                    <div class="q-label q-b-r">$y \oplus f(x)$</div>
+                    $U_f$
+                  </div>
+                </div>
+                <div class="q-wire"></div>
+              </div>
+              <div class="q-line">
+                <div class="q-wire"></div>
+                <div class="q-empty q-wide"></div>
+                <div class="q-wire"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            $$
+            U_f =
+            \begin{bmatrix}
+            0 & 1 & 0 & 0 \\
+            1 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 1 \\
+            0 & 0 & 1 & 0 \\
+            \end{bmatrix}
+            $$
+          </div>
+        </div>
+
+        <div class="fragment green" data-fragment-index="3">
+          $$
+          U_f^TU_f = I
+          $$
+        </div>
       </section>
 
       <section>
         <h2>Deutsch's algorithm circuit</h2>
 
-        <div class="q-circuit">
+        <div class="q-circuit fragment">
           <div class="q-line">
             <div class="q-input">
               $\ket{0}$
@@ -1590,13 +1804,313 @@
     </section>
 
     <!--
-    Where to go next
+    What's next
     -->
     <section>
-      <h2>Where to go next</h2>
+      <section>
+        <h2>What's next</h2>
+        <h3>The Deutsch-Josza algorithm</h3>
 
-      <h3>The Deutsch-Josza algorithm</h3>
-      <img src="assets/d-j.png" height="350rem" alt="Deutsch-Josza algorithm circuit">
+        <div style="position: absolute; width: 100%; z-index: -1;">
+          <div  data-fragment-index="1" class="q-circuit q-tiny fragment dim">
+            <div class="q-line">
+              <div class="q-input">
+                $\ket{0}$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-empty q-wide">
+                <div class="q-gate q-rowspan-6">
+                  $U_f$
+                </div>
+              </div>
+
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                <div class="q-icon-measure">
+                  <div class="crop">
+                    <div class="display">
+                    </div>
+                  </div>
+                  <div class="tick">
+                    <span class="dot"></span>
+                    <span class="line"></span>
+                    <span class="cursor"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="q-wire">
+
+              </div>
+            </div>
+
+            <div class="q-line">
+              <div class="q-input">
+                $\ket{0}$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-empty q-wide">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                <div class="q-icon-measure">
+                  <div class="crop">
+                    <div class="display">
+                    </div>
+                  </div>
+                  <div class="tick">
+                    <span class="dot"></span>
+                    <span class="line"></span>
+                    <span class="cursor"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="q-wire">
+
+              </div>
+            </div>
+
+            <div class="q-line">
+              <div class="q-input">
+                $\ket{0}$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-empty q-wide">
+
+              </div>
+
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                <div class="q-icon-measure">
+                  <div class="crop">
+                    <div class="display">
+                    </div>
+                  </div>
+                  <div class="tick">
+                    <span class="dot"></span>
+                    <span class="line"></span>
+                    <span class="cursor"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="q-wire">
+
+              </div>
+            </div>
+
+            <div class="q-line">
+              <div class="q-input">
+                $\ket{0}$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-empty q-wide">
+
+              </div>
+
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                <div class="q-icon-measure">
+                  <div class="crop">
+                    <div class="display">
+                    </div>
+                  </div>
+                  <div class="tick">
+                    <span class="dot"></span>
+                    <span class="line"></span>
+                    <span class="cursor"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="q-wire">
+
+              </div>
+            </div>
+
+            <div class="q-line">
+              <div class="q-input">
+                $\ket{0}$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-empty q-wide">
+
+              </div>
+
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                <div class="q-icon-measure">
+                  <div class="crop">
+                    <div class="display">
+                    </div>
+                  </div>
+                  <div class="tick">
+                    <span class="dot"></span>
+                    <span class="line"></span>
+                    <span class="cursor"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="q-wire">
+
+              </div>
+            </div>
+
+            <div class="q-line">
+              <div class="q-input">
+                $\ket{1}$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-gate">
+                $H$
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-empty q-wide">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+              <div class="q-wire">
+
+              </div>
+            </div>
+          </div >
+        </div>
+
+        <table class="fragment" data-fragment-index="1" style="z-index: 1;">
+          <thead>
+          <tr>
+            <th>Approach</th>
+            <th># of Queries</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+            <td>Digital</td>
+            <td>$2^{(n-1)} + 1$</td>
+          </tr>
+          <tr>
+            <td>Quantum</td>
+            <td>$1$</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section data-background="https://media.giphy.com/media/xUKrrEnN9I5lnrcSMv/giphy.gif">
+        <h1 class="green">Exponential speedup</h1>
+      </section>
     </section>
 
     <!--

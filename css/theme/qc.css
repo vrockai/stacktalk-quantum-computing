@@ -15,6 +15,17 @@
     border-color: #303030;
 }
 
+.reveal .slides section .fragment.dim {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.reveal .slides section .fragment.dim.visible {
+    /*color: #222;*/
+    /*border-color: #222;*/
+    filter: blur(30px);
+}
+
 .q-tiny .q-line {
     height: 4rem;
     margin-bottom: 2rem !important;
@@ -71,9 +82,23 @@
     justify-content: center;
 }
 
+.q-rowspan-6 {
+    width: 100%;
+    top: -3rem;
+    height: 54rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .q-tiny .q-rowspan-2 {
     top: -2rem;
     height: 10rem;
+}
+
+.q-tiny .q-rowspan-6 {
+    top: -2rem;
+    height: 34rem;
 }
 
 .q-rowspan-2 > .q-label, .q-empty > div {

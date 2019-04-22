@@ -400,3 +400,11 @@ body {
 .reveal section > section.push {
   margin-top: 4rem;
 }
+
+.reveal .q-overlay {
+  position: absolute;
+  font-size: 30rem;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
