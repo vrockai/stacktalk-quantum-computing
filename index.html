@@ -484,12 +484,12 @@
         </p>
 
         <p class="fragment">
-          <span class="fragment highlight-blue">$P(heads) = \frac{1}{2}$</span>,
-          <span class="fragment highlight-red">$P(tails) = \frac{1}{2}$</span>
+          <span class="fragment highlight-blue">$P_{heads} = \frac{1}{2}$</span>,
+          <span class="fragment highlight-red">$P_{tails} = \frac{1}{2}$</span>
         </p>
 
         <p class="fragment">
-          $P(heads) + P(tails) = 1$
+          $P_{heads} + P_{tails} = 1$
         </p>
 
         <p class="fragment m-t-xl">
@@ -513,12 +513,12 @@
         </p>
 
         <p class="fragment">
-          <span class="fragment highlight-blue">$P(\ket{heads}) = \frac{1}{2}$</span>,
-          <span class="fragment highlight-red">$P(\ket{tails}) = \frac{1}{2}$</span>
+          <span class="fragment highlight-blue">$P_{\ket{heads}} = \frac{1}{2}$</span>,
+          <span class="fragment highlight-red">$P_{\ket{tails}} = \frac{1}{2}$</span>
         </p>
 
         <p class="fragment">
-          $P(\ket{heads}) + P(\ket{tails}) = 1$
+          $P_{\ket{heads}} + P_{\ket{tails}} = 1$
         </p>
 
         <p class="fragment m-t-xl">
@@ -585,8 +585,8 @@
           $
           =
           \begin{bmatrix}
-          \color{b}\pm\sqrt{P(\ket{0})} \\
-          \color{r}\pm\sqrt{P(\ket{1})} \\
+          \color{b}\pm\sqrt{P_{\ket{0}}} \\
+          \color{r}\pm\sqrt{P_{\ket{1}}} \\
           \end{bmatrix}
           $
         </span>
@@ -594,7 +594,7 @@
 
         <p class="fragment" data-fragment-index="1">
           $
-          \lvert\alpha\rvert^2 = P(\ket{0}), \lvert\beta\rvert^2 = P(\ket{1})
+          \lvert\alpha\rvert^2 = P_{\ket{0}}, \lvert\beta\rvert^2 = P_{\ket{1}}
           $
         </p>
         <p class="fragment" data-fragment-index="2">
@@ -606,8 +606,8 @@
           $
           \ket{toss} =
           \begin{bmatrix}
-          \pm\sqrt{P(\ket{heads})} \\
-          \pm\sqrt{P(\ket{tails})} \\
+          \pm\sqrt{P_{\ket{heads}}} \\
+          \pm\sqrt{P_{\ket{tails}}} \\
           \end{bmatrix}
           =
           \begin{bmatrix}
@@ -1295,10 +1295,12 @@
       </section>
 
       <section>
-        <h2>The Oracle</h2>
         <div class="fragment q-overlay green">
           1
         </div>
+        
+        <h2>The Oracle</h2>
+
         <div class="fragment fade-out" data-fragment-index="2">
           <img src="assets/travolta.gif"
                class="fragment fade-right"
