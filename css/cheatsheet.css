@@ -1,5 +1,11 @@
 body {
     perspective: 2000px;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+.backgrounds {
+    z-index: 0;
 }
 
 .cheat {
@@ -9,14 +15,14 @@ body {
 #cheat {
     font-family: 'Pangolin', cursive;
     color: black !important;
-    width: 21rem;
+    width: 25rem;
     height: 36rem;
     position: fixed;
     right: 0;
     top: 12.5%;
     z-index: 1000;
-    background-image: url("../assets/paper.png");
-    padding: 5rem 5rem 5rem 7rem;
+    background-image: url("../assets/paper3.png");
+    padding: 5rem 5rem 5rem 3rem;
     transform: rotate3d(0, 1, 0, -110deg);
     transition: all 300ms ease;
     transform-origin: 100%;
@@ -34,4 +40,9 @@ body {
 #cheat .cheat {
     color: black;
     border-color: black;
+}
+
+#cheat ol li {
+    padding-left: 2rem;
+    line-height: 3.13rem;
 }
