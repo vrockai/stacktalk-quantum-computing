@@ -68,8 +68,8 @@
 }
 
 .q-empty {
+    top: -0.5rem;
     position: relative;
-    top: 50%;
     height: 100%;
 }
 

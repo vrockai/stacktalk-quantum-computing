@@ -49,7 +49,8 @@
 <body>
 <div class="reveal">
   <div id="cheat">
-    <ol></ol>
+    <ol>
+    </ol>
   </div>
   $
   \definecolor{r}{RGB}{255,44,45}
@@ -60,6 +61,233 @@
   \newcommand{\ket}[1]{ \mathbf{|#1\rangle} }
   $
   <div class="slides">
+    <section>
+      <h2>What's next</h2>
+      <h3>The Deutsch-Josza algorithm</h3>
+
+      <div style="position: absolute; width: 100%; z-index: -1;">
+        <div data-fragment-index="1" class="q-circuit q-tiny fragment dim">
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-empty q-wide">
+              <div class="q-gate q-rowspan-6">
+                $U_f$
+              </div>
+            </div>
+
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              <div class="q-icon-measure">
+                <div class="crop">
+                  <div class="display">
+                  </div>
+                </div>
+                <div class="tick">
+                  <span class="dot"></span>
+                  <span class="line"></span>
+                  <span class="cursor"></span>
+                </div>
+              </div>
+            </div>
+            <div class="q-wire">
+
+            </div>
+          </div>
+
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-empty q-wide">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              <div class="q-icon-measure">
+                <div class="crop">
+                  <div class="display">
+                  </div>
+                </div>
+                <div class="tick">
+                  <span class="dot"></span>
+                  <span class="line"></span>
+                  <span class="cursor"></span>
+                </div>
+              </div>
+            </div>
+            <div class="q-wire">
+
+            </div>
+          </div>
+
+          <div class="q-line">
+            <div class="q-empty"></div>
+            <div class="q-empty"></div>
+            <div class="q-empty"></div>
+            <div class="q-empty">
+              $\vdots$
+            </div>
+            <div class="q-empty"></div>
+            <div class="q-empty q-wide"></div>
+            <div class="q-empty"></div>
+            <div class="q-empty">
+              $\vdots$
+            </div>
+            <div class="q-empty"></div>
+            <div class="q-empty">
+              $\vdots$
+            </div>
+            <div class="q-empty"></div>
+          </div>
+
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{0}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-empty q-wide">
+
+            </div>
+
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              <div class="q-icon-measure">
+                <div class="crop">
+                  <div class="display">
+                  </div>
+                </div>
+                <div class="tick">
+                  <span class="dot"></span>
+                  <span class="line"></span>
+                  <span class="cursor"></span>
+                </div>
+              </div>
+            </div>
+            <div class="q-wire">
+
+            </div>
+          </div>
+
+          <div class="q-line">
+            <div class="q-input">
+              $\ket{1}$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-gate">
+              $H$
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-empty q-wide">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+            <div class="q-wire">
+
+            </div>
+          </div>
+        </div >
+      </div>
+
+      <table class="fragment" data-fragment-index="1" style="z-index: 1;">
+        <thead>
+        <tr>
+          <th>Approach</th>
+          <th># of Queries</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>Digital</td>
+          <td>$2^{(n-1)} + 1$</td>
+        </tr>
+        <tr>
+          <td>Quantum</td>
+          <td>$1$</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
     <!--
     Title
     -->
@@ -1483,7 +1711,7 @@
     Deutch's Algorithm Step
     -->
     <section>
-      <div id="deutsch" class="q-circuit q-tiny q-dim long-eq">
+      <div id="deutsch" class="q-circuit q-tiny q-dim long-eq" style="z-index: -100;">
         <div class="q-line">
           <div class="q-input">
             $\ket{0}$
@@ -1702,7 +1930,8 @@
         </div>
       </section>
 
-      <section data-background="https://media.giphy.com/media/Z2dFiEYGgUAXC/giphy.gif"></section>
+      <section data-state="hide-circuit"
+               data-background="https://media.giphy.com/media/Z2dFiEYGgUAXC/giphy.gif"></section>
 
       <section class="push" data-state="highlight-3">
         <h3>Evaluation / Case 2: balanced $f(x)$</h3>
@@ -1755,7 +1984,8 @@
         </div>
       </section>
 
-      <section data-background="https://media.giphy.com/media/uvoECTG2uCTrG/giphy.gif"></section>
+      <section data-state="hide-circuit"
+               data-background="https://media.giphy.com/media/uvoECTG2uCTrG/giphy.gif"></section>
 
       <section class="push" data-state="highlight-4">
         <h3>Back to normal</h3>
@@ -1791,7 +2021,8 @@
         </div>
       </section>
 
-      <section data-background="https://media.giphy.com/media/7NWhfa1lEHPqw/giphy.gif"></section>
+      <section data-state="hide-circuit"
+               data-background="https://media.giphy.com/media/7NWhfa1lEHPqw/giphy.gif"></section>
 
       <section data-state="highlight-5">
         <h3>Measurement</h3>
@@ -1822,7 +2053,8 @@
         </div>
       </section>
 
-      <section data-background="https://media.giphy.com/media/fV0oSDsZ4UgdW/giphy.gif"></section>
+      <section data-state="hide-circuit"
+               data-background="https://media.giphy.com/media/fV0oSDsZ4UgdW/giphy.gif"></section>
 
     </section>
 
@@ -2248,6 +2480,18 @@
     for (var i = 0; i < 6; i++) {
         registerHighlight(i);
     }
+
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        var circuit = $('#deutsch');
+        console.log('event.currentSlide.dataset.state', event.currentSlide.dataset.state);
+        if (event.currentSlide.dataset.state === 'hide-circuit') {
+            console.log('hiding');
+            circuit.css('opacity', '0');
+        } else {
+            console.log('showing');
+            circuit.css('opacity', '1');
+        }
+    } );
 
     Reveal.addEventListener('fragmentshown', function (event) {
         // event.fragment = the fragment DOM element

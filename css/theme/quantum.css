@@ -408,3 +408,8 @@ body {
   width: 100%;
   z-index: 1;
 }
+
+#deutsch {
+  opacity: 1;
+  transition: all 400ms;
+}
