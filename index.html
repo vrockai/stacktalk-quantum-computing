@@ -61,233 +61,6 @@
   \newcommand{\ket}[1]{ \mathbf{|#1\rangle} }
   $
   <div class="slides">
-    <section>
-      <h2>What's next</h2>
-      <h3>The Deutsch-Josza algorithm</h3>
-
-      <div style="position: absolute; width: 100%; z-index: -1;">
-        <div data-fragment-index="1" class="q-circuit q-tiny fragment dim">
-          <div class="q-line">
-            <div class="q-input">
-              $\ket{0}$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-empty q-wide">
-              <div class="q-gate q-rowspan-6">
-                $U_f$
-              </div>
-            </div>
-
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              <div class="q-icon-measure">
-                <div class="crop">
-                  <div class="display">
-                  </div>
-                </div>
-                <div class="tick">
-                  <span class="dot"></span>
-                  <span class="line"></span>
-                  <span class="cursor"></span>
-                </div>
-              </div>
-            </div>
-            <div class="q-wire">
-
-            </div>
-          </div>
-
-          <div class="q-line">
-            <div class="q-input">
-              $\ket{0}$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-empty q-wide">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              <div class="q-icon-measure">
-                <div class="crop">
-                  <div class="display">
-                  </div>
-                </div>
-                <div class="tick">
-                  <span class="dot"></span>
-                  <span class="line"></span>
-                  <span class="cursor"></span>
-                </div>
-              </div>
-            </div>
-            <div class="q-wire">
-
-            </div>
-          </div>
-
-          <div class="q-line">
-            <div class="q-empty"></div>
-            <div class="q-empty"></div>
-            <div class="q-empty"></div>
-            <div class="q-empty">
-              $\vdots$
-            </div>
-            <div class="q-empty"></div>
-            <div class="q-empty q-wide"></div>
-            <div class="q-empty"></div>
-            <div class="q-empty">
-              $\vdots$
-            </div>
-            <div class="q-empty"></div>
-            <div class="q-empty">
-              $\vdots$
-            </div>
-            <div class="q-empty"></div>
-          </div>
-
-          <div class="q-line">
-            <div class="q-input">
-              $\ket{0}$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-empty q-wide">
-
-            </div>
-
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              <div class="q-icon-measure">
-                <div class="crop">
-                  <div class="display">
-                  </div>
-                </div>
-                <div class="tick">
-                  <span class="dot"></span>
-                  <span class="line"></span>
-                  <span class="cursor"></span>
-                </div>
-              </div>
-            </div>
-            <div class="q-wire">
-
-            </div>
-          </div>
-
-          <div class="q-line">
-            <div class="q-input">
-              $\ket{1}$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-gate">
-              $H$
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-empty q-wide">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-            <div class="q-wire">
-
-            </div>
-          </div>
-        </div >
-      </div>
-
-      <table class="fragment" data-fragment-index="1" style="z-index: 1;">
-        <thead>
-        <tr>
-          <th>Approach</th>
-          <th># of Queries</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-          <td>Digital</td>
-          <td>$2^{(n-1)} + 1$</td>
-        </tr>
-        <tr>
-          <td>Quantum</td>
-          <td>$1$</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-
     <!--
     Title
     -->
@@ -2067,7 +1840,7 @@
         <h3>The Deutsch-Josza algorithm</h3>
 
         <div style="position: absolute; width: 100%; z-index: -1;">
-          <div  data-fragment-index="1" class="q-circuit q-tiny fragment dim">
+          <div data-fragment-index="1" class="q-circuit q-tiny fragment dim">
             <div class="q-line">
               <div class="q-input">
                 $\ket{0}$
@@ -2164,97 +1937,23 @@
             </div>
 
             <div class="q-line">
-              <div class="q-input">
-                $\ket{0}$
+              <div class="q-empty"></div>
+              <div class="q-empty"></div>
+              <div class="q-empty"></div>
+              <div class="q-empty">
+                $\vdots$
               </div>
-              <div class="q-wire">
-
+              <div class="q-empty"></div>
+              <div class="q-empty q-wide"></div>
+              <div class="q-empty"></div>
+              <div class="q-empty">
+                $\vdots$
               </div>
-              <div class="q-wire">
-
+              <div class="q-empty"></div>
+              <div class="q-empty">
+                $\vdots$
               </div>
-              <div class="q-gate">
-                $H$
-              </div>
-              <div class="q-wire">
-
-              </div>
-              <div class="q-empty q-wide">
-
-              </div>
-
-              <div class="q-wire">
-
-              </div>
-              <div class="q-gate">
-                $H$
-              </div>
-              <div class="q-wire">
-
-              </div>
-              <div class="q-gate">
-                <div class="q-icon-measure">
-                  <div class="crop">
-                    <div class="display">
-                    </div>
-                  </div>
-                  <div class="tick">
-                    <span class="dot"></span>
-                    <span class="line"></span>
-                    <span class="cursor"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="q-wire">
-
-              </div>
-            </div>
-
-            <div class="q-line">
-              <div class="q-input">
-                $\ket{0}$
-              </div>
-              <div class="q-wire">
-
-              </div>
-              <div class="q-wire">
-
-              </div>
-              <div class="q-gate">
-                $H$
-              </div>
-              <div class="q-wire">
-
-              </div>
-              <div class="q-empty q-wide">
-
-              </div>
-
-              <div class="q-wire">
-
-              </div>
-              <div class="q-gate">
-                $H$
-              </div>
-              <div class="q-wire">
-
-              </div>
-              <div class="q-gate">
-                <div class="q-icon-measure">
-                  <div class="crop">
-                    <div class="display">
-                    </div>
-                  </div>
-                  <div class="tick">
-                    <span class="dot"></span>
-                    <span class="line"></span>
-                    <span class="cursor"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="q-wire">
-
-              </div>
+              <div class="q-empty"></div>
             </div>
 
             <div class="q-line">
