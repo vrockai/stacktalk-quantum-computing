@@ -1,0 +1,37 @@
+body {
+    perspective: 2000px;
+}
+
+.cheat {
+    z-index: 1001;
+}
+
+#cheat {
+    font-family: 'Pangolin', cursive;
+    color: black !important;
+    width: 21rem;
+    height: 36rem;
+    position: fixed;
+    right: 0;
+    top: 12.5%;
+    z-index: 1000;
+    background-image: url("../assets/paper.png");
+    padding: 5rem 5rem 5rem 7rem;
+    transform: rotate3d(0, 1, 0, -110deg);
+    transition: all 300ms ease;
+    transform-origin: 100%;
+    opacity: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#cheat:hover {
+    transform: rotate3d(0, 1, 0, -45deg);
+    opacity: 1;
+}
+
+#cheat .cheat {
+    color: black;
+    border-color: black;
+}

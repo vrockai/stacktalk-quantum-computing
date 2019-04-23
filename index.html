@@ -6,14 +6,17 @@
 
   <title>Quantum Computing Demystified</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/quantum.css">
   <link rel="stylesheet" href="css/theme/qc.css">
+  <link rel="stylesheet" href="css/cheatsheet.css">
 
   <!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="lib/css/zenburn.css">
 
   <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 
   <!-- Printing and PDF exports -->
   <script>
@@ -44,8 +47,10 @@
   </style>
 </head>
 <body>
-
 <div class="reveal">
+  <div id="cheat">
+    <ol></ol>
+  </div>
   $
   \definecolor{r}{RGB}{255,44,45}
   \definecolor{b}{RGB}{27,145,255}
@@ -438,6 +443,7 @@
         <h2>Addition modulo 2 $\oplus$</h2>
         <h3>better known as XOR</h3>
 
+        <div>
         $$
         \begin{array}{ccc}
         x & y & x \oplus y \\
@@ -448,6 +454,11 @@
         1 & 1 & 0 \\
         \end{array}
         $$
+        </div>
+
+        <div class="cheat">
+          $0 \oplus y = y$
+        </div>
       </section>
     </section>
 
@@ -2198,6 +2209,10 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+         math: {
+             mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+             config: 'TeX-AMS_SVG'
+         },
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},
@@ -2254,14 +2269,37 @@
             })
         }, false);
     }
+
+    $( function() {
+        $( ".cheat" ).each(function() {
+          $(this).draggable({
+              revert: false,
+              helper: 'clone',
+              cursor: 'move',
+              cursorAt: { right: -100, bottom: -150 },
+          });
+        });
+
+        $('#cheat').droppable({
+            accept: '.cheat',
+            tolerance: 'touch',
+            classes: {'ui-droppable-hover': 'redred'},
+            drop: function( event, ui ) {
+                console.log('drop sign');
+                var clone = ui.draggable.clone();
+                var li = $('<li></li>');
+                li.append(clone);
+                clone.dblclick(function() {
+                    $(this).remove();
+                });
+                $('#cheat ol')
+                    .append(li);
+            }
+        });
+    });
 </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
-
-
-
-
-
 </script>
 </body>
 </html>
