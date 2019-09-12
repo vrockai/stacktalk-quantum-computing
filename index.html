@@ -61,10 +61,10 @@
     $
   </span>
 
-  <div id="cheat">
+  <!--div id="cheat">
     <ol>
     </ol>
-  </div>
+  </div-->
 
   <div class="slides">
     <!--
@@ -230,7 +230,7 @@
         </p>
         <p>
           $
-          M^{\dagger }M = I.
+          M^{\dagger }M = MM^{\dagger } = I.
           $
         </p>
 
@@ -240,7 +240,7 @@
           </p>
           <p>
             $
-            M^{T}M = I.
+            M^{T}M = MM^{T} = I.
             $
           </p>
         </div>
@@ -1139,8 +1139,8 @@
             <td>$x$</td>
             <td>$f(x) = 0$</td>
             <td>$f(x) = 1$</td>
-            <td>$f(x) = f(x)$</td>
-            <td>$f(x) = 0 \oplus f(x)$</td>
+            <td>$f(x) = x$</td>
+            <td>$f(x) = 1 \oplus x$</td>
           </tr>
           <tr>
             <td>$0$</td>
@@ -1226,8 +1226,8 @@
               \end{bmatrix}
               =
               \begin{bmatrix}
-              1 \\
-              0
+              0 \\
+              1
               \end{bmatrix}
               $$
             </p>
@@ -1269,7 +1269,7 @@
         <h2>The function</h2>
         <h3>Quantum attempt for balanced</h3>
 
-        <h4 class="long-eq">$f(x) = x$</h4>
+        <h4 class="long-eq">$f(x) = 0 \oplus x$</h4>
         <div class="q-circuit">
           <div class="q-line">
             <div class="q-input">
@@ -1290,7 +1290,7 @@
           </div>
         </div>
 
-        <h4 class="long-eq">$f(x) = 0 \oplus x$</h4>
+        <h4 class="long-eq">$f(x) = 1 \oplus x$</h4>
         <div class="q-circuit">
           <div class="q-line">
             <div class="q-input">
@@ -1306,7 +1306,7 @@
 
             </div>
             <div class="q-output">
-              $\ket{x \oplus f(x)}$
+              $\ket{1 \oplus x}$
             </div>
           </div>
         </div>
